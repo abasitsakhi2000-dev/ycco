@@ -11,7 +11,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- Content Security Policy -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://formsubmit.co https://api.web3forms.com;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 
@@ -419,7 +419,6 @@
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 Youth Commitment for Change Organisation. All rights reserved.</div>
       <div class="footer-legal-links">
-        <a href="#" data-modal="impressum">Legal Notice</a>
         <a href="#" data-modal="datenschutz">Privacy Policy</a>
         <a href="#" data-modal="agb">Terms &amp; Conditions</a>
         <a href="#" data-modal="cookie">Cookie Policy</a>
@@ -456,34 +455,6 @@
 </script>
 
 <!-- ===== LEGAL MODALS ===== -->
-
-<!-- Legal Notice -->
-<div class="legal-modal" id="modal-impressum">
-  <div class="legal-modal-box">
-    <button class="modal-close" data-close="impressum" aria-label="Close Legal Notice">✕</button>
-    <h2>Legal Notice</h2>
-    <p>Youth Commitment for Change Organisation (YCCO) is an internationally operating non-profit organisation. Founded on August 7, 2015, in Kabul, Afghanistan, YCCO today connects youth, women, communities, and institutions across 25+ countries.</p>
-    <p><strong>Administrative Office (Germany)</strong><br>
-    Youth Commitment for Change Organisation (YCCO)<br>
-    [Street and house number]<br>
-    [Postal code] [City], Germany</p>
-    <p><strong>Represented by:</strong><br>
-    [Name of Chairperson / Managing Director]</p>
-    <p><strong>Contact:</strong><br>
-    Email: <a href="mailto:info@ycco.org">info@ycco.org</a><br>
-    Phone: [+49 ...]</p>
-    <p><strong>Registration:</strong><br>
-    Registered in the association register at the district court [City], Germany<br>
-    Registration number: [VR …]</p>
-    <p><strong>Non-profit Status:</strong><br>
-    YCCO is recognised as a non-profit organisation under German law.<br>
-    Tax exemption notice from the tax office [City], dated [Date], Ref. [...]</p>
-    <p><strong>Responsible for content (§ 55 Para. 2 RStV):</strong><br>
-    [Name], [Address as above]</p>
-    <p><strong>Liability:</strong><br>
-    Despite careful review, we accept no liability for the content of external links. The operators of linked pages are solely responsible for their content.</p>
-  </div>
-</div>
 
 <!-- Privacy Policy -->
 <div class="legal-modal" id="modal-datenschutz">
@@ -806,30 +777,26 @@ if(sdgCanvas){
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
-    const endpoint = form.dataset.endpoint;
-    const useFormspree = endpoint && endpoint !== 'REPLACE_WITH_YOUR_FORMSPREE_ID';
-
-    if(useFormspree){
-      try{
-        const res = await fetch('https://formspree.io/f/'+endpoint, {
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify({name, email, subject, message})
-        });
-        if(res.ok){
-          setStatus('Thank you! Your message has been sent. We will get back to you shortly.','success');
-          form.reset();
-        } else {
-          throw new Error('server');
-        }
-      } catch(_){
-        setStatus('Something went wrong. Please email us directly at info@ycco.org','error');
+    try{
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          access_key: '01400373-aeb9-4510-90b0-b06c69d319e7',
+          name, email, subject: 'YCCO – '+subject, message,
+          from_name: 'YCCO',
+          replyto: email,
+          autoresponse: 'Thank you for reaching out to YCCO, '+name+'! We have received your message and will get back to you as soon as possible.\n\nBest regards,\nThe YCCO Team'
+        })
+      });
+      if(res.ok){
+        setStatus('Thank you! Your message has been sent. We will get back to you shortly.','success');
+        form.reset();
+      } else {
+        throw new Error('server');
       }
-    } else {
-      const body = 'Name: '+name+'\nEmail: '+email+'\n\n'+message;
-      window.location.href = 'mailto:info@ycco.org?subject='+encodeURIComponent('YCCO – '+subject)+'&body='+encodeURIComponent(body);
-      setStatus('Your email client should open with the message pre-filled. If it doesn\'t, email us directly at info@ycco.org','success');
-      form.reset();
+    } catch(_){
+      setStatus('Something went wrong. Please email us directly at info@ycco.org','error');
     }
 
     submitBtn.disabled = false;
