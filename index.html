@@ -3,33 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YCCO - Youth Commitment for Change</title>
+<meta name="theme-color" content="#5D3267">
+<meta name="description" content="YCCO empowers youth and women globally through education, advocacy, and economic development across 25+ countries. Join our mission for opportunities for all.">
+<meta name="keywords" content="youth empowerment, women rights, education, advocacy, economic development, non-profit, SDG, global change">
+<meta name="author" content="Youth Commitment for Change Organisation">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Content Security Policy -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ycco.org/">
+<meta property="og:title" content="YCCO - Youth Commitment for Change">
+<meta property="og:description" content="Empowering youth and women globally through education, advocacy, and economic development across 25+ countries.">
+<meta property="og:image" content="https://ycco.org/images/og-image.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://ycco.org/">
+<meta property="twitter:title" content="YCCO - Youth Commitment for Change">
+<meta property="twitter:description" content="Empowering youth and women globally through education, advocacy, and economic development across 25+ countries.">
+<meta property="twitter:image" content="https://ycco.org/images/og-image.jpg">
+
+<title>YCCO - Youth Commitment for Change | Empowering Youth & Women Globally</title>
+<!-- Favicon: SVG data URI — replace with /images/favicon.svg for production -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%235D3267'/%3E%3Ctext x='50' y='54' font-size='60' font-family='Inter%2Csans-serif' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='700'%3EY%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://ycco.org/">
+<link rel="alternate" hreflang="en" href="https://ycco.org/">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
-<nav id="navbar">
+<nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-left">
     <div class="logo-box">
-      <img src="logo-B0TsoBVE.jpeg" alt="Youth's Commitment for Change Logo" class="site-logo">
+      <img src="images/logo.png" alt="Youth Commitment for Change Organisation logo" class="site-logo" width="80" height="80" loading="eager">
     </div>
     <span class="logo-wordmark">YCCO</span>
   </div>
-  <ul class="nav-center">
-    <li><a href="#about">About</a></li>
-    <li><a href="#programs">Programs</a></li>
-    <li><a href="#impact">Impact</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+  <ul class="nav-center" id="nav-menu" role="list">
+    <li role="listitem"><a href="#about">About</a></li>
+    <li role="listitem"><a href="#programs">Programs</a></li>
+    <li role="listitem"><a href="#impact">Impact</a></li>
+    <li role="listitem"><a href="#partners">Partners</a></li>
+    <li role="listitem"><a href="#get-involved">Contact</a></li>
+    <li role="listitem"><a href="#get-involved" class="mobile-cta">Get Involved</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get Involved</a>
+  <div class="nav-actions">
+    <a href="#get-involved" class="nav-donate" aria-label="Donate to YCCO">Donate</a>
+    <a href="#get-involved" class="nav-cta">Get Involved</a>
+  </div>
 </nav>
 
+<main id="main-content">
 <section class="hero">
-  <div class="hero-blob1"></div>
-  <div class="hero-blob2"></div>
-  <div class="hero-badge">Est. 2017 · Going Global in 2025</div>
+  <div class="hero-blob1" aria-hidden="true"></div>
+  <div class="hero-blob2" aria-hidden="true"></div>
+  <div class="hero-badge">Est. 2015 · Going Global in 2025</div>
   <h1>
     <span class="h1-line1">Youth Commitment</span>
     <span class="h1-line2">for Change</span>
@@ -40,49 +86,7 @@
     <a href="#programs" class="btn-hero-primary">Explore Programs</a>
     <a href="#about" class="btn-hero-outline">Our Story</a>
   </div>
-  <div class="hero-bottom-fade"></div>
-</section>
-
-<section class="impact" id="impact">
-  <div class="section-container layout-flex">
-    <div class="impact-globe-col reveal">
-      <svg class="globe-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="130" cy="130" r="115" fill="none" stroke="#c4b5fd" stroke-width="1.2"/>
-        <ellipse cx="130" cy="130" rx="45" ry="115" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
-        <ellipse cx="130" cy="130" rx="88" ry="115" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
-        <line x1="15" y1="130" x2="245" y2="130" stroke="#c4b5fd" stroke-width="0.9"/>
-        <ellipse cx="130" cy="130" rx="115" ry="42" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
-        <ellipse cx="130" cy="130" rx="115" ry="82" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
-        <circle cx="72" cy="82" r="5.5" fill="#7c3aed"/>
-        <circle cx="148" cy="72" r="5.5" fill="#7c3aed"/>
-        <circle cx="198" cy="126" r="5.5" fill="#7c3aed"/>
-      </svg>
-    </div>
-    <div class="impact-content">
-      <div class="reveal">
-        <h2>Our Global Impact</h2>
-        <p>From Kabul to the world — connecting youth with opportunities that transform lives and communities.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card reveal d1">
-          <div class="stat-num"><span class="ctr" data-to="500">500</span>+</div>
-          <div class="stat-label">Students Placed</div>
-        </div>
-        <div class="stat-card reveal d2">
-          <div class="stat-num"><span class="ctr" data-to="50">50</span>+</div>
-          <div class="stat-label">Partner Universities</div>
-        </div>
-        <div class="stat-card glow reveal d3">
-          <div class="stat-num"><span class="ctr" data-to="25">25</span>+</div>
-          <div class="stat-label">Countries Reached</div>
-        </div>
-        <div class="stat-card reveal d4">
-          <div class="stat-num"><span class="ctr" data-to="8">8</span>+</div>
-          <div class="stat-label">Years of Impact</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="hero-bottom-fade" aria-hidden="true"></div>
 </section>
 
 <section class="story" id="about">
@@ -120,13 +124,55 @@
   </div>
 </section>
 
+<section class="impact" id="impact">
+  <div class="section-container layout-flex">
+    <div class="impact-globe-col reveal">
+      <svg class="globe-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="130" cy="130" r="115" fill="none" stroke="#c4b5fd" stroke-width="1.2"/>
+        <ellipse cx="130" cy="130" rx="45" ry="115" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
+        <ellipse cx="130" cy="130" rx="88" ry="115" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
+        <line x1="15" y1="130" x2="245" y2="130" stroke="#c4b5fd" stroke-width="0.9"/>
+        <ellipse cx="130" cy="130" rx="115" ry="42" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
+        <ellipse cx="130" cy="130" rx="115" ry="82" fill="none" stroke="#c4b5fd" stroke-width="0.9"/>
+        <circle cx="72" cy="82" r="5.5" fill="#7c3aed"/>
+        <circle cx="148" cy="72" r="5.5" fill="#7c3aed"/>
+        <circle cx="198" cy="126" r="5.5" fill="#7c3aed"/>
+      </svg>
+    </div>
+    <div class="impact-content">
+      <div class="reveal">
+        <h2>Our Global Impact</h2>
+        <p>From Kabul to the world — connecting youth with opportunities that transform lives and communities.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card reveal d1">
+          <div class="stat-num"><span class="ctr" data-to="500">500</span>+</div>
+          <div class="stat-label">Students Placed</div>
+        </div>
+        <div class="stat-card reveal d2">
+          <div class="stat-num"><span class="ctr" data-to="50">50</span>+</div>
+          <div class="stat-label">Partner Universities</div>
+        </div>
+        <div class="stat-card glow reveal d3">
+          <div class="stat-num"><span class="ctr" data-to="25">25</span>+</div>
+          <div class="stat-label">Countries Reached</div>
+        </div>
+        <div class="stat-card reveal d4">
+          <div class="stat-num"><span class="ctr" data-to="11">11</span>+</div>
+          <div class="stat-label">Years of Impact</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="programs" id="programs">
   <div class="section-container layout-flex">
     <div class="programs-left">
       
       <div class="sdg-wrap reveal">
         <div class="sdg-donut-container">
-          <canvas id="sdgCanvas" width="220" height="220"></canvas>
+          <canvas id="sdgCanvas" width="220" height="220" role="img" aria-label="Donut chart showing YCCO's contribution to UN SDGs 4, 5, 8, and 16 (highlighted)"></canvas>
           <div class="sdg-center-label">
             <span>SDGs</span>
             <small>We contribute to</small>
@@ -143,48 +189,64 @@
     <div class="programs-right">
       <div class="reveal">
         <div class="prog-label">WHAT WE DO</div>
-        <h2>Programs &amp; Services</h2><br>
+        <h2>Programs &amp; Services</h2>
         <p>Aligned with UN Sustainable Development Goals — SDG 4, SDG 5, SDG 8, and SDG 16.</p>
       </div>
       <div class="prog-grid">
         <div class="prog-card reveal d1">
           <div class="prog-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+           <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+    <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+</svg>
           </div>
           <h3>Education &amp; Capacity Building</h3>
           <p>Certification courses, workshops, digital learning platforms, and Training of Trainers (ToT) for educators and community leaders.</p>
         </div>
         <div class="prog-card reveal d2">
           <div class="prog-icon-wrap">
-            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+</svg>
+
           </div>
           <h3>Youth Employment &amp; Entrepreneurship</h3>
           <p>Mentorship programs, internship placements, and access to global business networks for economic self-reliance.</p>
         </div>
         <div class="prog-card reveal d3">
           <div class="prog-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+</svg>
+
           </div>
           <h3>Advocacy &amp; Policy Development</h3>
           <p>Global advocacy campaigns on youth rights, gender equality, and policy dialogue with governments and international organizations.</p>
         </div>
         <div class="prog-card reveal d4">
           <div class="prog-icon-wrap">
-            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+</svg>
           </div>
           <h3>Research &amp; Knowledge Sharing</h3>
           <p>Cross-border studies on youth empowerment, peacebuilding, global best-practice mapping and data-driven advocacy.</p>
         </div>
         <div class="prog-card reveal d1">
           <div class="prog-icon-wrap">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+
           </div>
           <h3>Peacebuilding &amp; Human Rights</h3>
           <p>Training on conflict resolution, democratic governance, women's rights awareness, and community mobilization for social cohesion.</p>
         </div>
         <div class="prog-card reveal d2">
           <div class="prog-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+</svg>
+
           </div>
           <h3>Global Networking &amp; Partnerships</h3>
           <p>Platforms connecting universities, NGOs, governments, and industries for cross-border collaboration and youth leadership exchanges.</p>
@@ -229,7 +291,7 @@
         <h3>Global Solidarity</h3>
         <p>Respecting cultural diversity while uniting for common goals</p>
       </div>
-      <div class="val-item reveal" style="transition-delay:0.4s">
+      <div class="val-item reveal d5">
         <div class="val-icon">
           <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.3"/></svg>
         </div>
@@ -261,18 +323,84 @@
   </div>
 </section>
 
+<section class="get-involved-section" id="get-involved">
+  <div class="section-container">
+    <div class="gi-inner">
+      <div class="gi-text reveal">
+        <div class="gi-label">JOIN THE MOVEMENT</div>
+        <h2>Get Involved</h2>
+        <p>Whether you want to partner, volunteer, donate, or simply learn more about our programs — we'd love to hear from you.</p>
+        <div class="gi-contact-row">
+          <div class="gi-contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="gi-contact-info">
+            <strong>Email</strong>
+            <a href="mailto:info@ycco.org">info@ycco.org</a>
+          </div>
+        </div>
+      </div>
+      <!-- data-endpoint: sign up at formspree.io, create a form, paste your form ID here -->
+      <form class="contact-form reveal d2" id="contactForm" novalidate data-endpoint="REPLACE_WITH_YOUR_FORMSPREE_ID">
+        <div class="form-group">
+          <label for="cf-name">Full Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" required autocomplete="name" aria-describedby="cf-name-error" aria-required="true">
+          <span class="field-error" id="cf-name-error" role="alert"></span>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address</label>
+          <input type="email" id="cf-email" name="email" placeholder="your@email.com" required autocomplete="email" aria-describedby="cf-email-error" aria-required="true">
+          <span class="field-error" id="cf-email-error" role="alert"></span>
+        </div>
+        <div class="form-group">
+          <label for="cf-subject">I want to…</label>
+          <select id="cf-subject" name="subject" aria-label="Purpose of inquiry">
+            <option value="" disabled selected>Select a reason…</option>
+            <option value="Volunteer">Volunteer</option>
+            <option value="Partnership">Partner with YCCO</option>
+            <option value="Donation">Support / Donate</option>
+            <option value="Programs">Learn about Programs</option>
+            <option value="General Inquiry">Other inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="Tell us about yourself and how you'd like to get involved…" required aria-describedby="cf-message-error" aria-required="true"></textarea>
+          <span class="field-error" id="cf-message-error" role="alert"></span>
+        </div>
+        <button type="submit" class="btn-form-submit">Send Message</button>
+        <div class="form-status" id="formSuccess" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <footer id="contact">
   <div class="section-container">
     <div class="footer-grid">
 <div class="foot-brand reveal">
   <div class="foot-logo-row">
     <div class="foot-logo-box">
-      <img src="logo-B0TsoBVE.jpeg" alt="Youth's Commitment for Change Logo" class="foot-logo">
+      <img src="images/logo.png" alt="Youth Commitment for Change Organisation logo" class="foot-logo" width="80" height="80" loading="lazy">
     </div>
     <span class="foot-logo-name">YCCO</span>
   </div>
   <p>Youth Commitment for Change Organisation. Empowering youth and women globally since 2015.</p>
   <div class="foot-tagline">"Opportunities for All"</div>
+  <div class="foot-social">
+    <a href="https://www.linkedin.com/company/ycco" target="_blank" rel="noopener noreferrer" aria-label="YCCO on LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://twitter.com/ycco" target="_blank" rel="noopener noreferrer" aria-label="YCCO on X / Twitter">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/ycco" target="_blank" rel="noopener noreferrer" aria-label="YCCO on Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/ycco" target="_blank" rel="noopener noreferrer" aria-label="YCCO on Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+  </div>
 </div>
 
       <div class="foot-col reveal d1">
@@ -291,12 +419,223 @@
       </div>
     </div>
     <hr class="footer-divider">
-    <div class="footer-copy">© 2026 Youth Commitment for Change Organisation. All rights reserved.</div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Youth Commitment for Change Organisation. All rights reserved.</div>
+      <div class="footer-legal-links">
+        <a href="#" data-modal="impressum">Impressum</a>
+        <a href="#" data-modal="datenschutz">Datenschutzerklärung</a>
+        <a href="#" data-modal="agb">AGB</a>
+        <a href="#" data-modal="cookie">Cookie-Richtlinie</a>
+        <a href="#" data-modal="satzung">Satzung</a>
+      </div>
+    </div>
   </div>
 </footer>
+</main>
+
+<!-- ===== STRUCTURED DATA (SCHEMA.ORG) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Youth Commitment for Change Organisation",
+  "alternateName": "YCCO",
+  "url": "https://ycco.org",
+  "logo": "https://ycco.org/images/Design%20ohne%20Titel.png",
+  "description": "Empowering youth and women globally through education, advocacy, and economic development across 25+ countries.",
+  "foundingDate": "2015-08-07",
+  "areaServed": "Worldwide",
+  "sameAs": [
+    "https://twitter.com/ycco",
+    "https://www.linkedin.com/company/ycco",
+    "https://www.facebook.com/ycco"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "info@ycco.org",
+    "contactType": "customer service"
+  }
+}
+</script>
+
+<!-- ===== LEGAL MODALS ===== -->
+
+<!-- Impressum -->
+<div class="legal-modal" id="modal-impressum">
+  <div class="legal-modal-box">
+    <button class="modal-close" data-close="impressum" aria-label="Impressum schließen">✕</button>
+    <h2>Impressum</h2>
+    <p><strong>Angaben gemäß § 5 TMG</strong></p>
+    <p>Youth Commitment for Change Organisation (YCCO)<br>
+    [Straße und Hausnummer]<br>
+    [PLZ] [Stadt], Deutschland</p>
+    <p><strong>Vertreten durch:</strong><br>
+    [Name des Vorstands / Geschäftsführers]</p>
+    <p><strong>Kontakt:</strong><br>
+    E-Mail: <a href="mailto:info@ycco.org">info@ycco.org</a><br>
+    Telefon: [+49 ...]</p>
+    <p><strong>Vereinsregister:</strong><br>
+    Eingetragen im Vereinsregister beim Amtsgericht [Stadt]<br>
+    Registernummer: [VR …]</p>
+    <p><strong>Gemeinnützigkeit:</strong><br>
+    YCCO ist als gemeinnütziger Verein anerkannt.<br>
+    Freistellungsbescheid des Finanzamts [Stadt] vom [Datum], Az. [...]</p>
+    <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
+    [Name], [Adresse wie oben]</p>
+    <p><strong>Haftungshinweis:</strong><br>
+    Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+  </div>
+</div>
+
+<!-- Datenschutzerklärung -->
+<div class="legal-modal" id="modal-datenschutz">
+  <div class="legal-modal-box">
+    <button class="modal-close" data-close="datenschutz" aria-label="Datenschutzerklärung schließen">✕</button>
+    <h2>Datenschutzerklärung</h2>
+    <p><strong>1. Verantwortlicher</strong><br>
+    Youth Commitment for Change Organisation (YCCO), [Adresse], E-Mail: info@ycco.org</p>
+    <p><strong>2. Erhebung und Speicherung personenbezogener Daten</strong><br>
+    Beim Besuch unserer Website werden automatisch Informationen allgemeiner Natur erfasst (Server-Log-Dateien), darunter Browsertyp, Betriebssystem, Referrer-URL, IP-Adresse und Datum/Uhrzeit des Zugriffs. Diese Daten sind nicht bestimmten Personen zuordbar und werden nicht mit anderen Datenquellen zusammengeführt.</p>
+    <p><strong>3. Verwendung von Cookies</strong><br>
+    Unsere Website verwendet technisch notwendige Cookies, um den Betrieb der Seite zu gewährleisten. Darüber hinaus setzen wir nur Cookies ein, wenn Sie zuvor Ihre Einwilligung erteilt haben.</p>
+    <p><strong>4. Kontaktaufnahme per E-Mail</strong><br>
+    Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+    <p><strong>5. Ihre Rechte (DSGVO)</strong><br>
+    Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21). Zur Ausübung dieser Rechte wenden Sie sich an: info@ycco.org</p>
+    <p><strong>6. Beschwerderecht</strong><br>
+    Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren.</p>
+    <p><strong>7. Aktualität</strong><br>
+    Diese Datenschutzerklärung ist aktuell gültig und datiert vom Januar 2026.</p>
+  </div>
+</div>
+
+<!-- AGB -->
+<div class="legal-modal" id="modal-agb">
+  <div class="legal-modal-box">
+    <button class="modal-close" data-close="agb" aria-label="AGB schließen">✕</button>
+    <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
+    <p><strong>§ 1 Geltungsbereich</strong><br>
+    Diese AGB gelten für alle Leistungen der Youth Commitment for Change Organisation (YCCO) gegenüber Teilnehmern, Partnern und sonstigen Vertragspartnern.</p>
+    <p><strong>§ 2 Leistungen</strong><br>
+    YCCO erbringt Bildungs-, Beratungs- und Vernetzungsleistungen im Bereich Jugendförderung, Frauenrechte und nachhaltige Entwicklung. Der genaue Leistungsumfang ergibt sich aus der jeweiligen Vereinbarung.</p>
+    <p><strong>§ 3 Teilnahme und Anmeldung</strong><br>
+    Die Anmeldung zu Programmen und Veranstaltungen erfolgt schriftlich oder per E-Mail. Eine Teilnahme ist erst nach Bestätigung durch YCCO verbindlich.</p>
+    <p><strong>§ 4 Haftung</strong><br>
+    YCCO haftet nur bei Vorsatz und grober Fahrlässigkeit. Bei leichter Fahrlässigkeit haftet YCCO nur bei Verletzung wesentlicher Vertragspflichten, begrenzt auf vorhersehbare Schäden.</p>
+    <p><strong>§ 5 Gerichtsstand und anwendbares Recht</strong><br>
+    Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist der Sitz von YCCO, soweit gesetzlich zulässig.</p>
+    <p><strong>§ 6 Änderungen</strong><br>
+    YCCO behält sich vor, diese AGB jederzeit zu ändern. Die jeweils aktuelle Fassung ist auf der Website abrufbar.</p>
+  </div>
+</div>
+
+<!-- Cookie-Richtlinie -->
+<div class="legal-modal" id="modal-cookie">
+  <div class="legal-modal-box">
+    <button class="modal-close" data-close="cookie" aria-label="Cookie-Richtlinie schließen">✕</button>
+    <h2>Cookie-Richtlinie</h2>
+    <p>Diese Website verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern und den Betrieb der Seite sicherzustellen.</p>
+    <p><strong>Was sind Cookies?</strong><br>
+    Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen.</p>
+    <p><strong>Welche Cookies verwenden wir?</strong></p>
+    <p><em>Notwendige Cookies:</em> Diese Cookies sind für den technischen Betrieb der Website unbedingt erforderlich. Sie ermöglichen grundlegende Funktionen wie Seitennavigation und sind daher immer aktiv.</p>
+    <p><em>Analyse-Cookies (nur mit Einwilligung):</em> Diese helfen uns zu verstehen, wie Besucher mit der Website interagieren. Wir setzen diese nur ein, wenn Sie zugestimmt haben.</p>
+    <p><strong>Wie können Sie Cookies kontrollieren?</strong><br>
+    Sie können Cookies in den Einstellungen Ihres Browsers jederzeit löschen oder blockieren. Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies die Funktionalität der Website einschränken kann.</p>
+    <p>Weitere Informationen finden Sie in unserer <a href="#" data-close="cookie" data-open="datenschutz">Datenschutzerklärung</a>.</p>
+  </div>
+</div>
+
+<!-- Satzung -->
+<div class="legal-modal" id="modal-satzung">
+  <div class="legal-modal-box">
+    <button class="modal-close" data-close="satzung" aria-label="Satzung schließen">✕</button>
+    <h2>Satzung des Vereins</h2>
+    <p><strong>§ 1 Name, Sitz und Geschäftsjahr</strong><br>
+    Der Verein trägt den Namen „Youth Commitment for Change Organisation" (YCCO). Er hat seinen Sitz in [Stadt], Deutschland, und ist im Vereinsregister eingetragen. Das Geschäftsjahr ist das Kalenderjahr.</p>
+    <p><strong>§ 2 Zweck des Vereins</strong><br>
+    Der Verein verfolgt ausschließlich und unmittelbar gemeinnützige Zwecke im Sinne des Abschnitts „Steuerbegünstigte Zwecke" der Abgabenordnung. Zweck des Vereins ist die Förderung der Jugend- und Altenhilfe, der Bildung und Erziehung sowie der internationalen Gesinnung und Toleranz.</p>
+    <p><strong>§ 3 Mitgliedschaft</strong><br>
+    Mitglied des Vereins kann jede natürliche oder juristische Person werden, die die Ziele des Vereins unterstützt. Die Aufnahme erfolgt durch schriftlichen Antrag an den Vorstand.</p>
+    <p><strong>§ 4 Organe des Vereins</strong><br>
+    Organe des Vereins sind: (1) die Mitgliederversammlung, (2) der Vorstand.</p>
+    <p><strong>§ 5 Vorstand</strong><br>
+    Der Vorstand im Sinne des § 26 BGB besteht aus dem/der Vorsitzenden, dem/der stellvertretenden Vorsitzenden und dem/der Kassenwart/in. Der Verein wird gerichtlich und außergerichtlich durch zwei Vorstandsmitglieder gemeinsam vertreten.</p>
+    <p><strong>§ 6 Auflösung</strong><br>
+    Bei Auflösung des Vereins oder Wegfall steuerbegünstigter Zwecke fällt das Vermögen des Vereins an eine juristische Person des öffentlichen Rechts oder eine andere steuerbegünstigte Körperschaft zwecks Verwendung für die Förderung von Bildung und Jugendarbeit.</p>
+    <p><em>Stand: Januar 2026</em></p>
+  </div>
+</div>
 
 <script>
-/* ── Scroll-spy for reveal animations ── */
+/* ── Mobile Menu Toggle with focus trap ── */
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navCenter = document.querySelector('.nav-center');
+let removeTrap = null;
+
+function getFocusables(el){
+  return Array.from(el.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])'))
+    .filter(f => !f.disabled);
+}
+
+function trapFocus(el){
+  const handler = function(e){
+    if(e.key !== 'Tab') return;
+    const foc = getFocusables(el);
+    if(!foc.length) return;
+    const first = foc[0], last = foc[foc.length-1];
+    if(e.shiftKey){
+      if(document.activeElement === first){ e.preventDefault(); last.focus(); }
+    } else {
+      if(document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  };
+  el.addEventListener('keydown', handler);
+  return () => el.removeEventListener('keydown', handler);
+}
+
+function closeMobileMenu(){
+  if(!mobileMenuToggle || !navCenter) return;
+  mobileMenuToggle.setAttribute('aria-expanded', 'false');
+  navCenter.classList.remove('mobile-open');
+  document.body.style.overflow = '';
+  if(removeTrap){ removeTrap(); removeTrap = null; }
+}
+
+if(mobileMenuToggle && navCenter){
+  mobileMenuToggle.addEventListener('click', function(){
+    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    const opening = !isExpanded;
+    this.setAttribute('aria-expanded', String(opening));
+    navCenter.classList.toggle('mobile-open', opening);
+    document.body.style.overflow = opening ? 'hidden' : '';
+    if(opening){
+      removeTrap = trapFocus(navCenter);
+      const firstLink = navCenter.querySelector('a');
+      if(firstLink) firstLink.focus();
+    } else {
+      if(removeTrap){ removeTrap(); removeTrap = null; }
+    }
+  });
+  navCenter.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+}
+
+/* ── Close mobile menu on Escape ── */
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    const anyModal = document.querySelector('.legal-modal.active');
+    if(anyModal){
+      closeModal(anyModal.id.replace('modal-',''));
+    } else if(mobileMenuToggle && mobileMenuToggle.getAttribute('aria-expanded') === 'true'){
+      closeMobileMenu();
+      mobileMenuToggle.focus();
+    }
+  }
+});
+
+/* ── Scroll-spy reveal animations ── */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting){
@@ -308,7 +647,7 @@ const io = new IntersectionObserver(entries => {
       });
     }
   });
-}, {threshold:0.05}); // Lowered threshold to ensure visibility fields catch blocks instantly
+}, {threshold:0.05});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 /* ── Counter animation ── */
@@ -324,21 +663,183 @@ function runCounter(el){
   })(t0);
 }
 
-/* ── Smooth scroll ── */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+/* ── Legal Modal helpers ── */
+const _modalOpeners = {};
+function openModal(id){
+  const el = document.getElementById('modal-'+id);
+  if(!el) return;
+  _modalOpeners[id] = document.activeElement;
+  el.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const closeBtn = el.querySelector('.modal-close');
+  if(closeBtn) closeBtn.focus();
+  el._removeTrap = trapFocus(el.querySelector('.legal-modal-box'));
+}
+function closeModal(id){
+  const el = document.getElementById('modal-'+id);
+  if(!el) return;
+  el.classList.remove('active');
+  if(el._removeTrap){ el._removeTrap(); el._removeTrap = null; }
+  if(!document.querySelector('.legal-modal.active')){
+    document.body.style.overflow = '';
+  }
+  if(_modalOpeners[id]){ _modalOpeners[id].focus(); delete _modalOpeners[id]; }
+}
+
+/* ── Modal open triggers (data-modal) ── */
+document.querySelectorAll('[data-modal]').forEach(el => {
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    openModal(this.dataset.modal);
   });
 });
 
-/* ── SDG Donut Chart ── */
+/* ── Modal close triggers (data-close, optional data-open) ── */
+document.querySelectorAll('[data-close]').forEach(el => {
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    closeModal(this.dataset.close);
+    if(this.dataset.open) openModal(this.dataset.open);
+  });
+});
+
+/* ── Close modal on backdrop click ── */
+document.querySelectorAll('.legal-modal').forEach(m => {
+  m.addEventListener('click', function(e){
+    if(e.target === m){ closeModal(m.id.replace('modal-','')); }
+  });
+});
+
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if(href === '#') return;
+    const t = document.querySelector(href);
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+
+/* ── Scroll-to-top button ── */
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+if(scrollTopBtn){
+  window.addEventListener('scroll', function(){
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, {passive: true});
+  scrollTopBtn.addEventListener('click', function(){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+}
+
+/* ── SDG canvas: pause animation when off-screen ── */
+const sdgCanvas = document.getElementById('sdgCanvas');
+if(sdgCanvas){
+  const sdgObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      sdgCanvas.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+    });
+  }, {threshold: 0});
+  sdgObserver.observe(sdgCanvas);
+}
+
+/* ── Contact form with Formspree + per-field validation ── */
+(function(){
+  const form = document.getElementById('contactForm');
+  const statusEl = document.getElementById('formSuccess');
+  if(!form || !statusEl) return;
+
+  function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function setFieldError(id, msg){
+    const input = document.getElementById(id);
+    const errEl = document.getElementById(id+'-error');
+    if(input){ input.setAttribute('aria-invalid','true'); }
+    if(errEl){ errEl.textContent = msg; errEl.style.display = 'block'; }
+  }
+  function clearFieldError(id){
+    const input = document.getElementById(id);
+    const errEl = document.getElementById(id+'-error');
+    if(input){ input.removeAttribute('aria-invalid'); }
+    if(errEl){ errEl.textContent = ''; errEl.style.display = 'none'; }
+  }
+  function setStatus(msg, type){
+    statusEl.textContent = msg;
+    statusEl.className = 'form-status visible ' + type;
+  }
+
+  ['cf-name','cf-email','cf-message'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', () => clearFieldError(id));
+  });
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const subject = document.getElementById('cf-subject').value;
+    const message = document.getElementById('cf-message').value.trim();
+
+    let hasError = false;
+    clearFieldError('cf-name'); clearFieldError('cf-email'); clearFieldError('cf-message');
+    statusEl.className = 'form-status';
+
+    if(!name){   setFieldError('cf-name',    'Please enter your full name.'); hasError = true; }
+    if(!email){  setFieldError('cf-email',   'Please enter your email address.'); hasError = true; }
+    else if(!isValidEmail(email)){ setFieldError('cf-email', 'Please enter a valid email address.'); hasError = true; }
+    if(!message){ setFieldError('cf-message','Please enter a message.'); hasError = true; }
+
+    if(hasError){
+      const firstBad = form.querySelector('[aria-invalid="true"]');
+      if(firstBad) firstBad.focus();
+      return;
+    }
+
+    const submitBtn = form.querySelector('.btn-form-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const endpoint = form.dataset.endpoint;
+    const useFormspree = endpoint && endpoint !== 'REPLACE_WITH_YOUR_FORMSPREE_ID';
+
+    if(useFormspree){
+      try{
+        const res = await fetch('https://formspree.io/f/'+endpoint, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({name, email, subject, message})
+        });
+        if(res.ok){
+          setStatus('Thank you! Your message has been sent. We will get back to you shortly.','success');
+          form.reset();
+        } else {
+          throw new Error('server');
+        }
+      } catch(_){
+        setStatus('Something went wrong. Please email us directly at info@ycco.org','error');
+      }
+    } else {
+      const body = 'Name: '+name+'\nEmail: '+email+'\n\n'+message;
+      window.location.href = 'mailto:info@ycco.org?subject='+encodeURIComponent('YCCO – '+subject)+'&body='+encodeURIComponent(body);
+      setStatus('Your email client should open with the message pre-filled. If it doesn\'t, email us directly at info@ycco.org','success');
+      form.reset();
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  });
+})();
+
+/* ── SDG Donut Chart (HiDPI-aware) ── */
 (function(){
   const canvas = document.getElementById('sdgCanvas');
   if(!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const size = 220;
+  canvas.width  = size * dpr;
+  canvas.height = size * dpr;
   const ctx = canvas.getContext('2d');
-  const W=220, H=220, cx=110, cy=110;
-  const outer=100, inner=64;
+  ctx.scale(dpr, dpr);
+  const cx=110, cy=110, outer=100, inner=64;
 
   const COLORS = [
     '#e5243b','#dda63a','#4c9f38','#c5192d','#ff3a21',
@@ -347,32 +848,29 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     '#00689d','#19486a'
   ];
   const HIGHLIGHT = new Set([3,4,7,15]);
-  const n = 17;
-  const gap = 0.022;
-  const segSpan = (Math.PI*2 - gap*n)/n;
-  let a = -Math.PI/2;
+  const n=17, gap=0.022;
+  const segSpan=(Math.PI*2 - gap*n)/n;
+  let a=-Math.PI/2;
 
   for(let i=0;i<n;i++){
-    const isHL = HIGHLIGHT.has(i);
-    const color = COLORS[i];
-
+    const isHL=HIGHLIGHT.has(i), color=COLORS[i];
     ctx.beginPath();
     ctx.arc(cx,cy,outer,a,a+segSpan);
     ctx.arc(cx,cy,inner,a+segSpan,a,true);
     ctx.closePath();
     ctx.fillStyle = isHL ? color : color+'50';
     ctx.fill();
-
-    const mid = a + segSpan/2;
-    const lr = (outer+inner)/2;
-    const lx = cx + Math.cos(mid)*lr;
-    const ly = cy + Math.sin(mid)*lr;
+    const mid=a+segSpan/2, lr=(outer+inner)/2;
+    const lx=cx+Math.cos(mid)*lr, ly=cy+Math.sin(mid)*lr;
+    ctx.save();
+    ctx.translate(lx,ly);
+    ctx.rotate(mid+Math.PI/2);
     ctx.fillStyle = isHL ? '#fff' : 'rgba(0,0,0,0.35)';
-    ctx.font = `${isHL?'bold ':''} ${isHL?13:9}px Inter,sans-serif`;
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(i+1, lx, ly);
-
-    a += segSpan + gap;
+    ctx.font=(isHL?'bold ':'')+''+(isHL?13:9)+'px Inter,sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(i+1,0,0);
+    ctx.restore();
+    a+=segSpan+gap;
   }
 })();
 </script>
