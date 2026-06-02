@@ -211,20 +211,17 @@ button:focus-visible, a:focus-visible {
   gap: 5px;
   width: 42px;
   height: 42px;
-  background: #fff;
-  border: 1.5px solid rgba(93, 50, 103, 0.2);
-  border-radius: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   padding: 0;
   z-index: 10001;
-  box-shadow: 0 1px 4px rgba(93, 50, 103, 0.08);
-  transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background var(--transition-fast);
 }
 
 .mobile-menu-toggle:hover {
-  background: #f3edf7;
-  border-color: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(93, 50, 103, 0.15);
+  background: rgba(93, 50, 103, 0.1);
 }
 
 .hamburger-line {
@@ -253,6 +250,10 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 1024px) {
   .mobile-menu-toggle {
     display: flex;
+  }
+
+  .nav-actions {
+    display: none;
   }
 
   .nav-center {
