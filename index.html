@@ -804,23 +804,6 @@ if(sdgCanvas){
   });
 })();
 
-/* ── Cookie consent banner ── */
-(function(){
-  const banner = document.getElementById('cookie-banner');
-  if(!banner) return;
-  if(!localStorage.getItem('cookie-consent')){
-    setTimeout(function(){ banner.classList.add('visible'); }, 600);
-  }
-  document.getElementById('cookie-accept').addEventListener('click', function(){
-    localStorage.setItem('cookie-consent','accepted');
-    banner.classList.remove('visible');
-  });
-  document.getElementById('cookie-decline').addEventListener('click', function(){
-    localStorage.setItem('cookie-consent','declined');
-    banner.classList.remove('visible');
-  });
-})();
-
 /* ── SDG Donut Chart (HiDPI-aware) ── */
 (function(){
   const canvas = document.getElementById('sdgCanvas');
@@ -880,5 +863,22 @@ if(sdgCanvas){
     </div>
   </div>
 </div>
+<script>
+(function(){
+  const banner = document.getElementById('cookie-banner');
+  if(!banner) return;
+  if(!localStorage.getItem('cookie-consent')){
+    setTimeout(function(){ banner.classList.add('visible'); }, 600);
+  }
+  document.getElementById('cookie-accept').addEventListener('click', function(){
+    localStorage.setItem('cookie-consent','accepted');
+    banner.classList.remove('visible');
+  });
+  document.getElementById('cookie-decline').addEventListener('click', function(){
+    localStorage.setItem('cookie-consent','declined');
+    banner.classList.remove('visible');
+  });
+})();
+</script>
 </body>
 </html>
