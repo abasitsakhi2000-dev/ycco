@@ -804,6 +804,23 @@ if(sdgCanvas){
   });
 })();
 
+/* ── Cookie consent banner ── */
+(function(){
+  const banner = document.getElementById('cookie-banner');
+  if(!banner) return;
+  if(!localStorage.getItem('cookie-consent')){
+    setTimeout(function(){ banner.classList.add('visible'); }, 600);
+  }
+  document.getElementById('cookie-accept').addEventListener('click', function(){
+    localStorage.setItem('cookie-consent','accepted');
+    banner.classList.remove('visible');
+  });
+  document.getElementById('cookie-decline').addEventListener('click', function(){
+    localStorage.setItem('cookie-consent','declined');
+    banner.classList.remove('visible');
+  });
+})();
+
 /* ── SDG Donut Chart (HiDPI-aware) ── */
 (function(){
   const canvas = document.getElementById('sdgCanvas');
@@ -849,5 +866,19 @@ if(sdgCanvas){
   }
 })();
 </script>
+
+<!-- Cookie consent banner -->
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie consent">
+  <div class="cookie-banner-inner">
+    <p class="cookie-banner-text">
+      We use cookies to improve your experience on our site. By clicking "Accept", you agree to our
+      <a href="#" data-modal="cookie">Cookie Policy</a>.
+    </p>
+    <div class="cookie-banner-actions">
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Decline</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accept</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
