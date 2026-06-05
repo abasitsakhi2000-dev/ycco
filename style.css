@@ -358,8 +358,7 @@ button:focus-visible, a:focus-visible {
   backdrop-filter:blur(6px);
 }
 .hero h1{
-  font-size:clamp(56px,7.5vw,70px);
-  font-weight:800;
+  font-size:clamp(56px,7.5vw,70px);                                                               
   line-height:1.04;
   margin-bottom:28px;
   max-width:860px;

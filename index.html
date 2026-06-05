@@ -11,7 +11,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- Content Security Policy -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://formsubmit.co https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://formsubmit.co https://api.web3forms.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://formsubmit.co https://api.web3forms.com https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://formsubmit.co https://api.web3forms.com;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 
@@ -421,7 +421,6 @@
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 Youth Commitment for Change Organisation. All rights reserved.</div>
       <div class="footer-legal-links">
-        <a href="#" data-modal="datenschutz">Privacy Policy</a>
         <a href="#" data-modal="agb">Terms &amp; Conditions</a>
         <a href="#" data-modal="cookie">Cookie Policy</a>
         <a href="#" data-modal="satzung">Articles of Association</a>
@@ -787,11 +786,14 @@ if(sdgCanvas){
           access_key: 'bf38340b-6fb1-4b1b-ba66-215a61c4e006',
           name, email, subject: 'YCCO – '+subject, message,
           from_name: 'YCCO',
-          replyto: email,
-          autoresponse: 'Thank you for reaching out to YCCO, '+name+'! We have received your message and will get back to you as soon as possible.\n\nBest regards,\nThe YCCO Team'
+          replyto: email
         })
       });
       if(res.ok){
+        emailjs.send('service_lh6jnaf', 'template_gcjx16h', {
+          from_name: name,
+          from_email: email
+        }, 'rH6c9MN1ZR3DKrZ_R');
         setStatus('Thank you! Your message has been sent. We will get back to you shortly.','success');
         form.reset();
       } else {
@@ -882,5 +884,6 @@ if(sdgCanvas){
   });
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 </html>
