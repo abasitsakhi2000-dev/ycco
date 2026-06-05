@@ -468,10 +468,13 @@ button:focus-visible, a:focus-visible {
   color:#111827;margin-bottom:14px;
   letter-spacing:-0.5px;
 }
-.impact-content>p{
+.impact-content p{
   font-size:16px;color:#6b7280;
-  line-height:1.6;margin-bottom:60px;
+  line-height:1.6;margin-bottom:0;
   max-width:540px;
+}
+.impact-content>.reveal{
+  margin-bottom:60px;
 }
 .stats-grid{
   display:grid;
