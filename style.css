@@ -165,6 +165,7 @@ button:focus-visible, a:focus-visible {
     height: auto;
     display: block;
     object-fit: contain;
+    mix-blend-mode: multiply;
 }
 .logo-box svg{width:46px;height:46px}
 .logo-wordmark{
