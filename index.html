@@ -342,8 +342,7 @@
           </div>
         </div>
       </div>
-      <!-- data-endpoint: sign up at formspree.io, create a form, paste your form ID here -->
-      <form class="contact-form reveal d2" id="contactForm" novalidate data-endpoint="REPLACE_WITH_YOUR_FORMSPREE_ID">
+      <form class="contact-form reveal d2" id="contactForm" novalidate>
         <div class="form-group">
           <label for="cf-name">Full Name</label>
           <input type="text" id="cf-name" name="name" placeholder="Your name" required autocomplete="name" aria-describedby="cf-name-error" aria-required="true">
@@ -749,7 +748,7 @@ if(sdgCanvas){
   sdgObserver.observe(sdgCanvas);
 }
 
-/* ── Contact form with Formspree + per-field validation ── */
+/* ── Contact form with Web3Forms + EmailJS notification + per-field validation ── */
 (function(){
   const form = document.getElementById('contactForm');
   const statusEl = document.getElementById('formSuccess');
