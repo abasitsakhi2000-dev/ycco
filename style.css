@@ -474,10 +474,10 @@ button:focus-visible, a:focus-visible {
   max-width:540px;
 }
 .impact-content>.reveal{
-  margin-bottom:60px;
+  margin-bottom:25px;
 }
 .impact-content .stats-grid{
-  margin-top:40px;
+  margin-top:10px;
 }
 .stats-grid{
   display:grid;
