@@ -370,6 +370,39 @@
           <textarea id="cf-message" name="message" rows="4" placeholder="Tell us about yourself and how you'd like to get involved…" required aria-describedby="cf-message-error" aria-required="true"></textarea>
           <span class="field-error" id="cf-message-error" role="alert"></span>
         </div>
+        <div class="form-agreements">
+          <div class="form-agreements-title">Agreements</div>
+
+          <div class="form-check-group">
+            <div class="form-check-label-row">Terms &amp; Conditions <span class="form-check-required">*</span></div>
+            <label class="form-check">
+              <input type="checkbox" id="cf-terms" name="terms" required aria-required="true" aria-describedby="cf-terms-error">
+              <span class="form-check-custom" aria-hidden="true"></span>
+              <span class="form-check-text">I have read and agree to the <a href="#" data-modal="agb">Terms &amp; Conditions</a> of YCCO.</span>
+            </label>
+            <span class="field-error" id="cf-terms-error" role="alert"></span>
+          </div>
+
+          <div class="form-check-group">
+            <div class="form-check-label-row">Privacy Policy <span class="form-check-required">*</span></div>
+            <label class="form-check">
+              <input type="checkbox" id="cf-privacy" name="privacy" required aria-required="true" aria-describedby="cf-privacy-error">
+              <span class="form-check-custom" aria-hidden="true"></span>
+              <span class="form-check-text">I consent to my personal data being processed by YCCO in accordance with the <a href="#" data-modal="datenschutz">Privacy Policy</a>.</span>
+            </label>
+            <span class="field-error" id="cf-privacy-error" role="alert"></span>
+          </div>
+
+          <div class="form-check-group">
+            <div class="form-check-label-row">Newsletter <span class="form-check-optional">(optional)</span></div>
+            <label class="form-check">
+              <input type="checkbox" id="cf-newsletter" name="newsletter">
+              <span class="form-check-custom" aria-hidden="true"></span>
+              <span class="form-check-text">I would like to receive updates about YCCO's programs, events, and activities.</span>
+            </label>
+          </div>
+        </div>
+
         <button type="submit" class="btn-form-submit">Send Message</button>
         <div class="form-status" id="formSuccess" role="alert" aria-live="polite"></div>
       </form>
@@ -751,6 +784,10 @@ if(sdgCanvas){
     const el = document.getElementById(id);
     if(el) el.addEventListener('input', () => clearFieldError(id));
   });
+  ['cf-terms','cf-privacy'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('change', () => clearFieldError(id));
+  });
 
   form.addEventListener('submit', async function(e){
     e.preventDefault();
@@ -759,14 +796,20 @@ if(sdgCanvas){
     const subject = document.getElementById('cf-subject').value;
     const message = document.getElementById('cf-message').value.trim();
 
+    const terms    = document.getElementById('cf-terms').checked;
+    const privacy  = document.getElementById('cf-privacy').checked;
+
     let hasError = false;
     clearFieldError('cf-name'); clearFieldError('cf-email'); clearFieldError('cf-message');
+    clearFieldError('cf-terms'); clearFieldError('cf-privacy');
     statusEl.className = 'form-status';
 
     if(!name){   setFieldError('cf-name',    'Please enter your full name.'); hasError = true; }
     if(!email){  setFieldError('cf-email',   'Please enter your email address.'); hasError = true; }
     else if(!isValidEmail(email)){ setFieldError('cf-email', 'Please enter a valid email address.'); hasError = true; }
     if(!message){ setFieldError('cf-message','Please enter a message.'); hasError = true; }
+    if(!terms){   setFieldError('cf-terms',  'You must agree to the Terms &amp; Conditions.'); hasError = true; }
+    if(!privacy){ setFieldError('cf-privacy','You must agree to the Privacy Policy.'); hasError = true; }
 
     if(hasError){
       const firstBad = form.querySelector('[aria-invalid="true"]');
