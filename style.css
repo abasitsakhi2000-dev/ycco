@@ -872,7 +872,7 @@ button:focus-visible, a:focus-visible {
 .partner-pills{
   display:flex;flex-direction:column;
   align-items:center;gap:16px;
-  margin-top:40px;
+  margin-top:25px;
 }
 .partner-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .pp{
