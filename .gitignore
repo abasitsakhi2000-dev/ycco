@@ -1,4 +1,66 @@
+# Dependencies
 node_modules/
-package.json
-package-lock.json
+
+# Build artifacts
+dist/
+build/
+
+# Environment files (never commit secrets!)
+.env
+.env.local
+.env.*.local
+
+# API keys and secrets
+*.key
+*.pem
+*.cert
+
+# Database files
+*.sql
+*.db
+*.sqlite
+
+# Log files
+*.log
+logs/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude settings (optional - keep local)
 .claude/
+
+# Package files (if not needed in repo)
+# package.json
+# package-lock.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Upload directory (if used)
+uploads/
+media/
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Local configuration overrides
+config.local.json
+settings.local.json
