@@ -15,7 +15,7 @@ img, svg { max-width: 100%; height: auto; }
   /* Neutral Colors */
   --color-text: #111827;
   --color-text-muted: #6b7280;
-  --color-text-light: #9ca3af;
+  --color-text-light: #6b7280;
   --color-bg: #fff;
   --color-bg-alt: #f9f8fa;
   --color-bg-alt2: #f5f3fa;
@@ -636,7 +636,7 @@ button:focus-visible, a:focus-visible {
 .sdg-donut-container{
   position:relative;
   width:100%;
-  max-width:260px;
+  max-width:220px;
   aspect-ratio:1/1;
   margin:0 auto;
 }
@@ -946,17 +946,17 @@ footer{
   font-size:13px;font-style:italic;
   color:rgba(255,255,255,0.5);
 }
-.foot-col h4{
+.foot-col h3{
   font-size:17px;font-weight:700;color:#fff;
   margin-bottom:24px;
 }
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
 .foot-col ul a{
-  font-size:15px;color:rgba(255,255,255,0.68);
+  font-size:15px;color:rgba(255,255,255,0.82);
   text-decoration:none;transition:color 0.15s;
 }
 .foot-col ul a:hover{color:#fff}
-.foot-touch h4{
+.foot-touch h3{
   font-size:17px;font-weight:700;color:#fff;margin-bottom:20px;
 }
 .foot-touch p{
@@ -983,7 +983,7 @@ footer{
 }
 .footer-copy{
   text-align:center;
-  font-size:13px;color:rgba(255,255,255,0.55);
+  font-size:13px;color:rgba(255,255,255,0.75);
 }
 
 /* ===== REVEAL ANIMATIONS FIXED ===== */
@@ -1191,22 +1191,6 @@ footer{
   font-weight:500;
 }
 .gi-contact-info a:hover{ text-decoration:underline; }
-.gi-chips{
-  display:flex;flex-wrap:wrap;gap:10px;
-}
-.gi-chip{
-  padding:10px 22px;
-  border:1.5px solid #c4b5fd;
-  border-radius:999px;
-  font-size:14px;font-weight:600;color:#5d3267;
-  text-decoration:none;background:#fff;
-  transition:background 0.15s,color 0.15s,border-color 0.15s;
-}
-.gi-chip:hover{background:#5d3267;color:#fff;border-color:#5d3267;}
-.gi-chip--highlight{
-  background:#5d3267;color:#fff;border-color:#5d3267;
-}
-.gi-chip--highlight:hover{background:#3d1f52;border-color:#3d1f52;}
 
 /* Contact form */
 .contact-form{
