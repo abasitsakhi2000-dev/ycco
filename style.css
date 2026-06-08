@@ -71,8 +71,8 @@ body{font-family:var(--font-family);color:var(--color-text);background:var(--col
 
 /* ===== SKIP LINK FOR ACCESSIBILITY ===== */
 .skip-link {
-  position: absolute;
-  top: -40px;
+  position: fixed;
+  top: -100px;
   left: 0;
   background: var(--color-primary);
   color: #fff;
