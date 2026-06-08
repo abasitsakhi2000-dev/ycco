@@ -636,6 +636,7 @@ button:focus-visible, a:focus-visible {
 .sdg-donut-container{
   position:relative;
   width:100%;
+  max-width:260px;
   aspect-ratio:1/1;
   margin:0 auto;
 }
@@ -667,8 +668,8 @@ button:focus-visible, a:focus-visible {
   display:block;font-size:12px;color:#9ca3af;margin-top:2px;
 }
 .sdg-tags {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 8px;
 }
