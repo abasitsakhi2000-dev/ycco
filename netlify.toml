@@ -1,0 +1,13 @@
+# Netlify deploy settings for this static site.
+# With this file, importing the repo on Netlify needs no manual configuration:
+# no build step, and the site is served straight from the repo root.
+
+[build]
+  publish = "."
+  command = ""
+
+# Let /admin resolve with or without a trailing slash.
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301

@@ -62,6 +62,7 @@
     <li role="listitem"><a href="#impact">Impact</a></li>
     <li role="listitem"><a href="#programs">Programs</a></li>
     <li role="listitem"><a href="#partners">Partners</a></li>
+    <li role="listitem"><a href="#news">News</a></li>
     <li role="listitem"><a href="#get-involved">Contact</a></li>
   </ul>
   <div class="nav-actions">
@@ -319,6 +320,19 @@
         <div class="pp">Universities &amp; Think Tanks</div>
         <div class="pp">Private Sector Partners</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="news" id="news">
+  <div class="section-container">
+    <div class="reveal">
+      <div class="news-label">NEWS &amp; EVENTS</div>
+      <h2>Latest Updates</h2>
+      <p>News, events and stories from our work across the YCCO network.</p>
+    </div>
+    <div class="news-grid" id="news-grid" aria-live="polite">
+      <p class="news-empty">Loading latest updates…</p>
     </div>
   </div>
 </section>
@@ -926,6 +940,87 @@ if(sdgCanvas){
     localStorage.setItem('cookie-consent','declined');
     banner.classList.remove('visible');
   });
+})();
+</script>
+<script>
+/* ── News & Events ──────────────────────────────────────────────
+   Loads entries from content/news.json (edited via /admin, the CMS).
+   Rendered with textContent so content is never injected as HTML. ── */
+(function(){
+  var grid = document.getElementById('news-grid');
+  var section = document.getElementById('news');
+  if(!grid) return;
+
+  function hideSection(){ if(section){ section.hidden = true; } }
+  function safeLink(url){ return typeof url === 'string' && /^(https?:\/\/|\/)/i.test(url.trim()); }
+
+  fetch('content/news.json', { cache: 'no-cache' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(data){
+      var items = (data && Array.isArray(data.items)) ? data.items.slice() : [];
+      items.sort(function(a, b){ return String(b.date || '').localeCompare(String(a.date || '')); });
+      items = items.filter(function(it){ return it && it.title; }).slice(0, 6);
+
+      if(!items.length){ hideSection(); return; }
+
+      var frag = document.createDocumentFragment();
+      items.forEach(function(it){
+        var card = document.createElement('article');
+        card.className = 'news-card';
+
+        if(it.image){
+          var media = document.createElement('div');
+          media.className = 'news-card-media';
+          var img = document.createElement('img');
+          img.src = it.image;
+          img.alt = it.title || '';
+          img.loading = 'lazy';
+          media.appendChild(img);
+          card.appendChild(media);
+        }
+
+        var body = document.createElement('div');
+        body.className = 'news-card-body';
+
+        if(it.date){
+          var t = document.createElement('time');
+          t.className = 'news-card-date';
+          t.dateTime = it.date;
+          var d = new Date(it.date);
+          t.textContent = isNaN(d.getTime()) ? it.date
+            : d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' });
+          body.appendChild(t);
+        }
+
+        var h = document.createElement('h3');
+        h.className = 'news-card-title';
+        h.textContent = it.title;
+        body.appendChild(h);
+
+        if(it.summary){
+          var p = document.createElement('p');
+          p.className = 'news-card-summary';
+          p.textContent = it.summary;
+          body.appendChild(p);
+        }
+
+        if(safeLink(it.link)){
+          var a = document.createElement('a');
+          a.className = 'news-card-link';
+          a.href = it.link.trim();
+          a.textContent = 'Read more';
+          if(/^https?:\/\//i.test(it.link.trim())){ a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+          body.appendChild(a);
+        }
+
+        card.appendChild(body);
+        frag.appendChild(card);
+      });
+
+      grid.innerHTML = '';
+      grid.appendChild(frag);
+    })
+    .catch(hideSection);
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS" crossorigin="anonymous"></script>
