@@ -62,7 +62,12 @@ function renderPage(status, contentJson) {
 <script>
 (function () {
   var message = ${JSON.stringify(message)};
+  // Only ever hand the access token to our own CMS window. Without this check a
+  // malicious site could open this OAuth flow in a popup and, as the opener,
+  // receive the token. We reply only if the opener's origin is one of ours.
+  var ALLOWED = ['https://www.infoycco.com', 'https://infoycco.com', 'https://dashing-begonia-7fb7cb.netlify.app'];
   function receiveMessage(e) {
+    if (ALLOWED.indexOf(e.origin) === -1) return;
     window.opener.postMessage(message, e.origin);
     window.removeEventListener('message', receiveMessage, false);
   }

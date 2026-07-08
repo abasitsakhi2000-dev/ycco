@@ -16,10 +16,13 @@ exports.handler = async (event) => {
   // Random state for CSRF protection; verified in callback.js via a cookie.
   const state = crypto.randomBytes(16).toString('hex');
 
+  // Least privilege: the repo is public, so "public_repo" is enough. It lets the
+  // token write to public repos only, never the account's private repos.
+  // If this repo is ever made private, change this to "repo".
   const authUrl = 'https://github.com/login/oauth/authorize'
     + `?client_id=${encodeURIComponent(clientId)}`
     + `&redirect_uri=${encodeURIComponent(redirectUri)}`
-    + `&scope=${encodeURIComponent('repo')}`
+    + `&scope=${encodeURIComponent('public_repo')}`
     + `&state=${state}`;
 
   return {
