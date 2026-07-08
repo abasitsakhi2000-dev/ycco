@@ -1,21 +1,3 @@
 {
-  "items": [
-    {
-      "title": "Welcome to the YCCO News section",
-      "date": "2026-07-08",
-      "image": "",
-      "summary": "The newest date always appears first. Please Follow us!",
-      "link": ""
-    },
-    {
-      "date": "2026-07-08",
-      "title": "Welcome Again",
-      "summary": "Follow Us!"
-    },
-    {
-      "date": "2026-07-23",
-      "title": "Webinar: Public Diplomacy",
-      "summary": "Everyone can apply for it."
-    }
-  ]
+  "items": []
 }
