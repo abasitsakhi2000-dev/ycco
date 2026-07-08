@@ -1,13 +1,17 @@
 # Decap CMS configuration
 # Docs: https://decapcms.org/docs/configuration-options/
 #
-# Backend "git-gateway" uses Netlify Identity for login and commits changes
-# straight into this GitHub repo. Requires the site to be deployed on Netlify
-# with "Identity" and "Git Gateway" enabled (see SETUP-CMS.md).
+# Backend "github": the editor logs in with a GitHub account and Decap commits
+# changes straight into this repo. Login runs through the small OAuth functions
+# in netlify/functions/ (Netlify Identity is no longer offered for new projects).
+# base_url must point to wherever the site + functions are served. See SETUP-CMS.md.
 
 backend:
-  name: git-gateway
+  name: github
+  repo: abasitsakhi2000-dev/ycco
   branch: main
+  base_url: https://dashing-begonia-7fb7cb.netlify.app
+  auth_endpoint: /.netlify/functions/auth
   commit_messages:
     create: "Content: create {{collection}} “{{slug}}”"
     update: "Content: update {{collection}} “{{slug}}”"

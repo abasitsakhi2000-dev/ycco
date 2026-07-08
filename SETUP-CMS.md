@@ -1,13 +1,19 @@
-# CMS-Einrichtung (Decap CMS auf Netlify)
+# CMS-Einrichtung (Decap CMS auf Netlify, GitHub-Login)
 
 Damit der Kunde **News & Events** selbst auf der Website pflegen kann, wurde ein
 Git-basiertes CMS (**Decap CMS**) eingebaut. Der Kunde bearbeitet Inhalte über
-eine einfache Weboberfläche; Decap speichert die Änderungen direkt im Git-Repo
-und Netlify veröffentlicht die Seite automatisch neu.
+eine einfache Weboberfläche unter `/admin/`; Decap speichert die Änderungen
+direkt im Git-Repo und Netlify veröffentlicht die Seite automatisch neu.
 
-- **Kostenlos** (Netlify Free-Tier, Decap ist Open Source)
+- **Kostenlos** (Netlify Free-Tier + Functions, Decap ist Open Source)
 - **Kein Build-Framework** – die Seite bleibt reines HTML/CSS/JS
 - Der öffentliche Teil der Seite und die gehärtete CSP bleiben unverändert
+
+> **Hinweis zum Login:** Netlify hat den früheren „Identity"-Login für neue
+> Projekte abgeschaltet. Der Login läuft deshalb über **GitHub** – abgewickelt
+> von zwei kleinen Serverless-Funktionen (`netlify/functions/auth.js` und
+> `callback.js`) auf derselben Netlify-Site. Die editierende Person braucht
+> dadurch einen **GitHub-Account mit Schreibzugriff** aufs Repo (siehe Schritt 4).
 
 ---
 
@@ -16,70 +22,68 @@ und Netlify veröffentlicht die Seite automatisch neu.
 | Datei | Zweck |
 |-------|-------|
 | `admin/index.html` | Login + Editor-Oberfläche (`/admin/`) |
-| `admin/config.yml` | Definition der Inhalte („News & Events") |
+| `admin/config.yml` | Inhaltsmodell „News & Events", GitHub-Backend |
+| `netlify/functions/auth.js` + `callback.js` | GitHub-OAuth-Login |
 | `content/news.json` | Die Inhaltsdatei (enthält einen Beispiel-Eintrag) |
 | `images/news/` | Hier landen vom Kunden hochgeladene Bilder |
-| News-Section in `index.html` + Styles in `style.css` | Zeigt die neuesten 6 Einträge auf der Startseite (neuester zuerst) |
+| `netlify.toml` | Deploy- + Functions-Konfiguration |
+| News-Section in `index.html` + Styles in `style.css` | Zeigt die neuesten 6 Einträge auf der Startseite |
 
-Der **öffentliche Teil funktioniert sofort** – auch schon auf GitHub Pages. Nur
-das **Bearbeiten** über `/admin/` braucht die einmalige Netlify-Einrichtung unten.
+Der **öffentliche Teil funktioniert sofort**. Nur das **Bearbeiten** über
+`/admin/` braucht die einmalige Einrichtung unten.
 
 ---
 
-## Einmalige Einrichtung (ca. 15 Minuten)
+## Einmalige Einrichtung
 
-### 1. Seite auf Netlify deployen
-1. Konto anlegen auf <https://app.netlify.com> (z. B. mit dem GitHub-Login).
-2. **Add new site → Import an existing project → GitHub** und dieses Repo wählen.
-3. Build-Einstellungen:
-   - **Build command:** *(leer lassen)*
-   - **Publish directory:** `/` (das Repo-Root)
-4. **Deploy** klicken. Die Seite ist danach unter `https://<name>.netlify.app` live.
+### 1. Seite auf Netlify deployen  ✅ (erledigt)
+Site läuft unter `https://dashing-begonia-7fb7cb.netlify.app`.
+Publish-Verzeichnis und Functions sind durch `netlify.toml` schon gesetzt.
 
-### 2. Login aktivieren (Netlify Identity + Git Gateway)
-1. Im Netlify-Dashboard: **Site configuration → Identity → Enable Identity**.
-2. Unter **Registration preferences** → **Invite only** wählen
-   (nur eingeladene Personen können sich einloggen).
-3. Unter **Services → Git Gateway → Enable Git Gateway**.
-   (Das erlaubt Decap, im Namen des eingeloggten Nutzers ins Repo zu committen.)
+### 2. GitHub OAuth App anlegen
+1. GitHub → **Settings → Developer settings → OAuth Apps → New OAuth App**
+   (<https://github.com/settings/developers>).
+2. Werte:
+   - **Application name:** `YCCO CMS`
+   - **Homepage URL:** `https://dashing-begonia-7fb7cb.netlify.app`
+   - **Authorization callback URL:**
+     `https://dashing-begonia-7fb7cb.netlify.app/.netlify/functions/callback`
+3. **Register application** → **Client ID** kopieren.
+4. **Generate a new client secret** → **Client secret** kopieren
+   (wird nur einmal angezeigt).
 
-### 3. Einladungs-Link auf `/admin/` zeigen lassen  ← wichtig
-Standardmäßig führt Netlifys Einladungs-E-Mail auf die Startseite `/`. Dort liegt
-aber kein Login-Widget (bewusst – wegen der gehärteten CSP). Deshalb einmal das
-E-Mail-Template anpassen, damit der Link direkt auf `/admin/` zeigt:
+### 3. Zugangsdaten als Environment-Variablen in Netlify hinterlegen
+1. Netlify: **Site configuration → Environment variables → Add a variable**.
+2. Zwei Variablen anlegen:
+   - `OAUTH_GITHUB_CLIENT_ID`  = die Client ID aus Schritt 2
+   - `OAUTH_GITHUB_CLIENT_SECRET` = das Client Secret aus Schritt 2
+3. **Deploys → Trigger deploy → Deploy site**, damit die Funktionen die neuen
+   Variablen bekommen.
 
-1. **Identity → Emails → Invitation template → Edit**.
-2. Als **Custom template path** eine eigene Vorlage hinterlegen **oder** – der
-   einfachste Weg – die Aktions-URL im Template so setzen, dass sie auf
-   `/admin/` verweist:
-   ```
-   {{ .SiteURL }}/admin/#invite_token={{ .Token }}
-   ```
-3. Dasselbe für **Recovery** (Passwort vergessen):
-   ```
-   {{ .SiteURL }}/admin/#recovery_token={{ .Token }}
-   ```
-Der Link landet dann auf `/admin/`, wo das Login-Widget den Token automatisch
-erkennt und den Kunden sein Passwort setzen lässt.
+### 4. Editor-Zugang zum Repo geben
+Die editierende Person braucht einen GitHub-Account mit Schreibrecht auf das
+Repo `abasitsakhi2000-dev/ycco`. Zwei Wege:
 
-> Alternative, falls du das Template nicht anpassen willst: das
-> Netlify-Identity-Widget zusätzlich auf der Startseite laden. Das erfordert
-> aber `https://identity.netlify.com` in der öffentlichen CSP (`script-src`,
-> `connect-src`, `frame-src`). Der `/admin/`-Weg oben hält die öffentliche Seite
-> sauber – empfohlen.
+- **Empfohlen (am einfachsten für den Kunden):** einen eigenen „Redakteur"-
+  GitHub-Account anlegen (z. B. `ycco-content`), diesen als Collaborator
+  hinzufügen und dem Kunden die Zugangsdaten geben. Er sieht nur den
+  Decap-Editor, nie Code.
+- **Alternativ:** den vorhandenen GitHub-Account des Kunden als Collaborator
+  hinzufügen.
 
-### 4. Kunden einladen
-1. **Identity → Invite users** → E-Mail-Adresse des Kunden eingeben.
-2. Der Kunde bekommt eine E-Mail, klickt den Link, landet auf `/admin/`,
-   setzt sein Passwort – fertig.
+Collaborator hinzufügen: Repo → **Settings → Collaborators → Add people**.
+Die eingeladene Person muss die E-Mail-Einladung annehmen.
 
 ### 5. Domain umziehen (von GitHub Pages zu Netlify)
-1. In Netlify: **Domain management → Add a domain** → `www.infoycco.com`
+1. Netlify: **Domain management → Add a domain** → `www.infoycco.com`
    (und `infoycco.com`) hinzufügen.
-2. Beim Domain-Registrar die DNS-Einträge auf Netlify umstellen. Netlify zeigt
-   die genauen Werte an (i. d. R. `CNAME www → <name>.netlify.app` und für die
-   Apex-Domain einen A-/ALIAS-Eintrag). Alternativ die Netlify-DNS nutzen.
-3. Netlify stellt automatisch ein kostenloses HTTPS-Zertifikat aus.
+2. Beim Domain-Registrar die von Netlify angezeigten DNS-Einträge setzen
+   (i. d. R. `CNAME www → dashing-begonia-7fb7cb.netlify.app` und für die
+   Apex-Domain einen A-/ALIAS-Eintrag). Netlify stellt HTTPS automatisch aus.
+3. **Nach dem Domain-Wechsel** noch anpassen, damit der Login weiter geht:
+   - In `admin/config.yml` `base_url` auf `https://www.infoycco.com` ändern.
+   - In der GitHub OAuth App (Schritt 2) die Callback-URL auf
+     `https://www.infoycco.com/.netlify/functions/callback` ergänzen/ändern.
 
 > Hinweis: Die Datei `CNAME` im Repo ist GitHub-Pages-spezifisch und auf Netlify
 > wirkungslos – sie kann bleiben oder gelöscht werden.
@@ -88,13 +92,14 @@ erkennt und den Kunden sein Passwort setzen lässt.
 
 ## So benutzt der Kunde es
 
-1. `https://www.infoycco.com/admin/` aufrufen und einloggen.
+1. `https://www.infoycco.com/admin/` (bzw. vorerst die `.netlify.app`-Adresse)
+   aufrufen → **Login with GitHub** → mit dem Redakteur-Account einloggen.
 2. **News & Events** öffnen → Eintrag hinzufügen/bearbeiten/löschen
    (Titel, Datum, Bild optional, Kurztext, optionaler Link).
 3. **Publish** klicken. Netlify baut neu → nach ~1 Minute ist es live.
 
-Angezeigt werden die **6 neuesten** Einträge, automatisch nach Datum sortiert
-(neuester zuerst). Bilder werden nach `images/news/` hochgeladen (max. ~3 MB).
+Angezeigt werden die **6 neuesten** Einträge, automatisch nach Datum sortiert.
+Bilder werden nach `images/news/` hochgeladen (max. ~3 MB).
 
 ## Fallback: ohne CMS bearbeiten
 Man kann `content/news.json` auch direkt im Editor/GitHub bearbeiten – dieselbe

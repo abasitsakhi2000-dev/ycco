@@ -6,6 +6,11 @@
   publish = "."
   command = ""
 
+# Serverless functions that handle the GitHub OAuth login for the CMS.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Let /admin resolve with or without a trailing slash.
 [[redirects]]
   from = "/admin"
