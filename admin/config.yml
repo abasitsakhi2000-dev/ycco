@@ -10,7 +10,7 @@ backend:
   name: github
   repo: abasitsakhi2000-dev/ycco
   branch: main
-  base_url: https://dashing-begonia-7fb7cb.netlify.app
+  base_url: https://www.infoycco.com
   auth_endpoint: /.netlify/functions/auth
   commit_messages:
     create: "Content: create {{collection}} “{{slug}}”"
