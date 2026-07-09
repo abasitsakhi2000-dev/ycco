@@ -46,3 +46,24 @@ collections:
               - { name: "image", label: "Image (optional)", widget: "image", required: false, allow_multiple: false, media_library: { config: { max_file_size: 3000000 } } }
               - { name: "summary", label: "Short text", widget: "text", hint: "1–3 sentences shown on the card." }
               - { name: "link", label: "Link (optional)", widget: "string", required: false, pattern: ['^(https?://|/).*', "Must start with https:// or /"], hint: "Optional. e.g. https://… — adds a “Read more” button." }
+
+  - name: "projects"
+    label: "Current Projects"
+    files:
+      - name: "projects_list"
+        label: "Current Projects"
+        file: "content/projects.json"
+        description: "Add, edit, reorder or delete the projects shown in the “Current Projects” section (below Programs). Each project can link to a Google Form so people can register."
+        fields:
+          - { name: "intro", label: "Intro text (optional)", widget: "text", required: false, hint: "Optional short paragraph shown above the projects." }
+          - name: "items"
+            label: "Projects"
+            label_singular: "Project"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "status", label: "Status label (optional)", widget: "string", required: false, hint: "Small badge on the card, e.g. “Open for registration” or “Applications close 31 Aug”." }
+              - { name: "description", label: "Description", widget: "text", hint: "The project text. Leave a blank line between paragraphs to split them." }
+              - { name: "form_url", label: "Google Form link", widget: "string", required: false, pattern: ['^https://.*', "Must start with https://"], hint: "Paste the Google Form link here — it adds a “Register” button. Leave empty for no button." }
+              - { name: "button_label", label: "Button text (optional)", widget: "string", required: false, default: "Register", hint: "Text on the button. Defaults to “Register”." }

@@ -183,6 +183,41 @@ button:focus-visible, a:focus-visible {
   transition:color 0.15s;
 }
 .nav-center a:hover{color:#6d28d9}
+
+/* ===== NAV DROPDOWN (Programs → Current Projects) ===== */
+.nav-item-dropdown{ position:relative; }
+.nav-dropdown-toggle{ display:inline-flex; align-items:center; gap:5px; }
+.nav-caret{
+  width:13px; height:13px; stroke:currentColor; fill:none;
+  stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
+  transition:transform var(--transition-base);
+}
+.nav-item-dropdown:hover .nav-caret,
+.nav-item-dropdown:focus-within .nav-caret{ transform:rotate(180deg); }
+.nav-submenu{
+  position:absolute; top:100%; left:50%;
+  transform:translateX(-50%) translateY(6px);
+  min-width:212px; margin-top:14px; padding:8px;
+  list-style:none; display:flex; flex-direction:column; gap:2px;
+  background:#fff; border:1px solid var(--color-border-light);
+  border-radius:14px; box-shadow:0 12px 40px rgba(139,92,246,0.15);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  z-index:9999;
+}
+/* invisible bridge so the menu doesn't close while the cursor moves down */
+.nav-submenu::before{ content:""; position:absolute; top:-14px; left:0; right:0; height:14px; }
+.nav-item-dropdown:hover .nav-submenu,
+.nav-item-dropdown:focus-within .nav-submenu{
+  opacity:1; visibility:visible; pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+.nav-submenu a{
+  display:block; padding:10px 14px; border-radius:9px;
+  font-size:14.5px; white-space:nowrap;
+}
+.nav-submenu a:hover{ background:#f5f0f8; color:#6d28d9; }
+
 .nav-actions{
   display:flex;align-items:center;gap:8px;
 }
@@ -295,6 +330,21 @@ button:focus-visible, a:focus-visible {
 
   .nav-center a:hover {
     background: rgba(93, 50, 103, 0.05);
+  }
+
+  /* Dropdown collapses into inline, always-visible sub-items in the drawer */
+  .nav-caret { display: none; }
+  .nav-submenu {
+    position: static; transform: none; opacity: 1; visibility: visible;
+    pointer-events: auto; min-width: 0; margin: 0; padding: 0;
+    background: transparent; border: none; box-shadow: none;
+    flex-direction: column; gap: 0;
+  }
+  .nav-submenu::before { display: none; }
+  .nav-submenu a {
+    padding: 14px 24px; border-radius: 0; font-size: 15px; font-weight: 400;
+    color: #6a6483; border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(93, 50, 103, 0.035);
   }
 
   /* Show nav CTA in mobile menu */
@@ -1534,4 +1584,65 @@ footer{
 @media (prefers-reduced-motion: reduce){
   .news-card{ transition:none; }
   .news-card:hover{ transform:none; }
+}
+
+/* ===== CURRENT PROJECTS ===== */
+.current-projects{ padding: var(--spacing-2xl) 0; background: var(--color-bg-alt); }
+.cp-label{
+  font-size:0.8rem; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--color-accent);
+  margin-bottom:var(--spacing-sm);
+}
+.current-projects h2{
+  font-size:42px; font-weight:800; color:#111827;
+  line-height:1.08; margin-bottom:16px; letter-spacing:-0.5px;
+}
+.current-projects > .section-container > .reveal > p{
+  font-size:15px; color:var(--color-text-muted); line-height:1.7; max-width:640px;
+}
+.cp-intro{ margin-top:14px; color:var(--color-text); font-size:15.5px; line-height:1.7; max-width:720px; }
+.cp-grid{
+  display:grid; gap:var(--spacing-md);
+  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  margin-top:var(--spacing-lg);
+}
+.cp-empty{ color:var(--color-text-muted); }
+.cp-card{
+  display:flex; flex-direction:column; align-items:flex-start; gap:12px;
+  background:var(--color-bg);
+  border:1px solid var(--color-border-light);
+  border-radius:var(--radius-lg);
+  padding:32px 30px;
+  box-shadow:var(--shadow-sm);
+  transition:transform var(--transition-base), box-shadow var(--transition-base);
+}
+.cp-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.cp-card-status{
+  display:inline-block; padding:5px 12px; border-radius:var(--radius-full);
+  background:#f3e8fb; color:var(--color-accent);
+  font-size:0.72rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+}
+.cp-card-title{ font-size:1.3rem; font-weight:700; color:var(--color-text); line-height:1.25; }
+.cp-card-text{ font-size:0.97rem; color:var(--color-text-muted); line-height:1.65; }
+.cp-card-btn{
+  margin-top:6px;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:12px 24px; border-radius:var(--radius-full);
+  background:var(--color-accent); color:#fff;
+  font-size:0.95rem; font-weight:600; text-decoration:none;
+  transition:background var(--transition-base), transform var(--transition-base);
+}
+.cp-card-btn:hover{ background:var(--color-accent-hover); transform:translateY(-1px); }
+.cp-card-btn-arrow{ transition:transform var(--transition-base); }
+.cp-card-btn:hover .cp-card-btn-arrow{ transform:translateX(3px); }
+@media (max-width:640px){
+  .current-projects h2{ font-size:32px; }
+  .cp-grid{ grid-template-columns:1fr; }
+  .cp-card{ padding:26px 22px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .cp-card{ transition:none; }
+  .cp-card:hover{ transform:none; }
+  .cp-card-btn:hover{ transform:none; }
+  .cp-card-btn:hover .cp-card-btn-arrow{ transform:none; }
 }

@@ -60,7 +60,16 @@
   <ul class="nav-center" id="nav-menu" role="list">
     <li role="listitem"><a href="#about">About</a></li>
     <li role="listitem"><a href="#impact">Impact</a></li>
-    <li role="listitem"><a href="#programs">Programs</a></li>
+    <li role="listitem" class="nav-item-dropdown">
+      <a href="#programs" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Programs
+        <svg class="nav-caret" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </a>
+      <ul class="nav-submenu" role="list">
+        <li role="listitem"><a href="#programs">Programs &amp; Services</a></li>
+        <li role="listitem"><a href="#current-projects">Current Projects</a></li>
+      </ul>
+    </li>
     <li role="listitem"><a href="#partners">Partners</a></li>
     <li role="listitem"><a href="#news">News</a></li>
     <li role="listitem"><a href="#get-involved">Contact</a></li>
@@ -253,6 +262,20 @@
           <p>Platforms connecting universities, NGOs, governments, and industries for cross-border collaboration and youth leadership exchanges.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="current-projects" id="current-projects">
+  <div class="section-container">
+    <div class="reveal">
+      <div class="cp-label">GET INVOLVED</div>
+      <h2>Current Projects</h2>
+      <p>Ongoing projects and open calls. Register through the linked form to take part.</p>
+      <p class="cp-intro" id="projects-intro" hidden></p>
+    </div>
+    <div class="cp-grid" id="projects-grid" aria-live="polite">
+      <p class="cp-empty">Loading current projects…</p>
     </div>
   </div>
 </section>
@@ -1021,6 +1044,100 @@ if(sdgCanvas){
       grid.appendChild(frag);
     })
     .catch(hideSection);
+})();
+</script>
+<script>
+/* ── Current Projects ───────────────────────────────────────────
+   Loads entries from content/projects.json (edited via /admin, the CMS).
+   Each project can link out to a Google Form for registration.
+   Rendered with textContent so content is never injected as HTML. ── */
+(function(){
+  var grid = document.getElementById('projects-grid');
+  var section = document.getElementById('current-projects');
+  var introEl = document.getElementById('projects-intro');
+  if(!grid) return;
+
+  function hideSection(){ if(section){ section.hidden = true; } }
+  function safeFormLink(url){ return typeof url === 'string' && /^https:\/\//i.test(url.trim()); }
+
+  fetch('content/projects.json', { cache: 'no-cache' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(data){
+      var items = (data && Array.isArray(data.items)) ? data.items.slice() : [];
+      items = items.filter(function(it){ return it && it.title; });
+
+      if(!items.length){ hideSection(); return; }
+
+      var intro = data && typeof data.intro === 'string' ? data.intro.trim() : '';
+      if(intro && introEl){ introEl.textContent = intro; introEl.hidden = false; }
+
+      var frag = document.createDocumentFragment();
+      items.forEach(function(it){
+        var card = document.createElement('article');
+        card.className = 'cp-card';
+
+        if(it.status){
+          var badge = document.createElement('span');
+          badge.className = 'cp-card-status';
+          badge.textContent = it.status;
+          card.appendChild(badge);
+        }
+
+        var h = document.createElement('h3');
+        h.className = 'cp-card-title';
+        h.textContent = it.title;
+        card.appendChild(h);
+
+        if(it.description){
+          String(it.description).split(/\n{2,}/).forEach(function(par){
+            par = par.trim();
+            if(!par) return;
+            var p = document.createElement('p');
+            p.className = 'cp-card-text';
+            p.textContent = par;
+            card.appendChild(p);
+          });
+        }
+
+        if(safeFormLink(it.form_url)){
+          var a = document.createElement('a');
+          a.className = 'cp-card-btn';
+          a.href = it.form_url.trim();
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          var label = (typeof it.button_label === 'string' && it.button_label.trim())
+            ? it.button_label.trim() : 'Register';
+          a.textContent = label;
+          var arrow = document.createElement('span');
+          arrow.className = 'cp-card-btn-arrow';
+          arrow.setAttribute('aria-hidden', 'true');
+          arrow.textContent = '→';
+          a.appendChild(arrow);
+          card.appendChild(a);
+        }
+
+        frag.appendChild(card);
+      });
+
+      grid.innerHTML = '';
+      grid.appendChild(frag);
+    })
+    .catch(hideSection);
+})();
+
+/* ── Programs nav dropdown: keep aria-expanded in sync for AT ── */
+(function(){
+  var dd = document.querySelector('.nav-item-dropdown');
+  if(!dd) return;
+  var toggle = dd.querySelector('.nav-dropdown-toggle');
+  if(!toggle) return;
+  function set(open){ toggle.setAttribute('aria-expanded', String(open)); }
+  dd.addEventListener('mouseenter', function(){ set(true); });
+  dd.addEventListener('mouseleave', function(){ set(false); });
+  dd.addEventListener('focusin', function(){ set(true); });
+  dd.addEventListener('focusout', function(e){
+    if(!dd.contains(e.relatedTarget)){ set(false); }
+  });
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js" integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS" crossorigin="anonymous"></script>
