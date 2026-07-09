@@ -67,7 +67,8 @@
       </a>
       <ul class="nav-submenu" role="list">
         <li role="listitem"><a href="#programs">Programs &amp; Services</a></li>
-        <li role="listitem"><a href="#current-projects">Current Projects</a></li>
+        <li role="listitem"><a href="#upcoming-events">Upcoming Events</a></li>
+        <li role="listitem"><a href="#scholarship">Scholarship</a></li>
       </ul>
     </li>
     <li role="listitem"><a href="#partners">Partners</a></li>
@@ -266,16 +267,30 @@
   </div>
 </section>
 
-<section class="current-projects" id="current-projects">
+<section class="cp-section" id="upcoming-events">
   <div class="section-container">
     <div class="reveal">
-      <div class="cp-label">GET INVOLVED</div>
-      <h2>Current Projects</h2>
-      <p>Ongoing projects and open calls. Register through the linked form to take part.</p>
-      <p class="cp-intro" id="projects-intro" hidden></p>
+      <div class="cp-label">PROGRAMS</div>
+      <h2>Upcoming Events</h2>
+      <p>Workshops, webinars and gatherings across the YCCO network. Register through the linked form to take part.</p>
+      <p class="cp-intro" id="events-intro" hidden></p>
     </div>
-    <div class="cp-grid" id="projects-grid" aria-live="polite">
-      <p class="cp-empty">Loading current projects…</p>
+    <div class="cp-grid" id="events-grid" aria-live="polite">
+      <p class="cp-empty">Loading upcoming events…</p>
+    </div>
+  </div>
+</section>
+
+<section class="cp-section cp-section-alt" id="scholarship">
+  <div class="section-container">
+    <div class="reveal">
+      <div class="cp-label">PROGRAMS</div>
+      <h2>Scholarship</h2>
+      <p>Scholarship opportunities for young people. Apply through the linked form before the deadline.</p>
+      <p class="cp-intro" id="scholarship-intro" hidden></p>
+    </div>
+    <div class="cp-grid" id="scholarship-grid" aria-live="polite">
+      <p class="cp-empty">Loading scholarships…</p>
     </div>
   </div>
 </section>
@@ -1047,82 +1062,121 @@ if(sdgCanvas){
 })();
 </script>
 <script>
-/* ── Current Projects ───────────────────────────────────────────
-   Loads entries from content/projects.json (edited via /admin, the CMS).
-   Each project can link out to a Google Form for registration.
+/* ── Programs sub-sections: Upcoming Events & Scholarship ────────
+   Loads entries from content/*.json (edited via /admin, the CMS).
+   Each entry can link out to a Google Form to register/apply.
    Rendered with textContent so content is never injected as HTML. ── */
 (function(){
-  var grid = document.getElementById('projects-grid');
-  var section = document.getElementById('current-projects');
-  var introEl = document.getElementById('projects-intro');
-  if(!grid) return;
-
-  function hideSection(){ if(section){ section.hidden = true; } }
   function safeFormLink(url){ return typeof url === 'string' && /^https:\/\//i.test(url.trim()); }
+  function fmtDate(v){
+    if(!v) return '';
+    var d = new Date(v);
+    return isNaN(d.getTime()) ? String(v)
+      : d.toLocaleDateString('en-GB', { year:'numeric', month:'short', day:'numeric' });
+  }
 
-  fetch('content/projects.json', { cache: 'no-cache' })
-    .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(data){
-      var items = (data && Array.isArray(data.items)) ? data.items.slice() : [];
-      items = items.filter(function(it){ return it && it.title; });
+  function render(opts){
+    var grid = document.getElementById(opts.gridId);
+    var section = document.getElementById(opts.sectionId);
+    var introEl = document.getElementById(opts.introId);
+    if(!grid) return;
+    function hideSection(){ if(section){ section.hidden = true; } }
 
-      if(!items.length){ hideSection(); return; }
+    fetch(opts.src, { cache: 'no-cache' })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        var items = (data && Array.isArray(data.items)) ? data.items.slice() : [];
+        items = items.filter(function(it){ return it && it.title; });
+        if(opts.sort){ items.sort(opts.sort); }
 
-      var intro = data && typeof data.intro === 'string' ? data.intro.trim() : '';
-      if(intro && introEl){ introEl.textContent = intro; introEl.hidden = false; }
+        if(!items.length){ hideSection(); return; }
 
-      var frag = document.createDocumentFragment();
-      items.forEach(function(it){
-        var card = document.createElement('article');
-        card.className = 'cp-card';
+        var intro = data && typeof data.intro === 'string' ? data.intro.trim() : '';
+        if(intro && introEl){ introEl.textContent = intro; introEl.hidden = false; }
 
-        if(it.status){
-          var badge = document.createElement('span');
-          badge.className = 'cp-card-status';
-          badge.textContent = it.status;
-          card.appendChild(badge);
-        }
+        var frag = document.createDocumentFragment();
+        items.forEach(function(it){
+          var card = document.createElement('article');
+          card.className = 'cp-card';
 
-        var h = document.createElement('h3');
-        h.className = 'cp-card-title';
-        h.textContent = it.title;
-        card.appendChild(h);
+          var badge = opts.badge ? opts.badge(it) : '';
+          if(badge){
+            var b = document.createElement('span');
+            b.className = 'cp-card-status';
+            b.textContent = badge;
+            card.appendChild(b);
+          }
 
-        if(it.description){
-          String(it.description).split(/\n{2,}/).forEach(function(par){
-            par = par.trim();
-            if(!par) return;
-            var p = document.createElement('p');
-            p.className = 'cp-card-text';
-            p.textContent = par;
-            card.appendChild(p);
-          });
-        }
+          var h = document.createElement('h3');
+          h.className = 'cp-card-title';
+          h.textContent = it.title;
+          card.appendChild(h);
 
-        if(safeFormLink(it.form_url)){
-          var a = document.createElement('a');
-          a.className = 'cp-card-btn';
-          a.href = it.form_url.trim();
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          var label = (typeof it.button_label === 'string' && it.button_label.trim())
-            ? it.button_label.trim() : 'Register';
-          a.textContent = label;
-          var arrow = document.createElement('span');
-          arrow.className = 'cp-card-btn-arrow';
-          arrow.setAttribute('aria-hidden', 'true');
-          arrow.textContent = '→';
-          a.appendChild(arrow);
-          card.appendChild(a);
-        }
+          var meta = opts.meta ? opts.meta(it) : '';
+          if(meta){
+            var m = document.createElement('p');
+            m.className = 'cp-card-meta';
+            m.textContent = meta;
+            card.appendChild(m);
+          }
 
-        frag.appendChild(card);
-      });
+          if(it.description){
+            String(it.description).split(/\n{2,}/).forEach(function(par){
+              par = par.trim();
+              if(!par) return;
+              var p = document.createElement('p');
+              p.className = 'cp-card-text';
+              p.textContent = par;
+              card.appendChild(p);
+            });
+          }
 
-      grid.innerHTML = '';
-      grid.appendChild(frag);
-    })
-    .catch(hideSection);
+          if(safeFormLink(it.form_url)){
+            var a = document.createElement('a');
+            a.className = 'cp-card-btn';
+            a.href = it.form_url.trim();
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            var label = (typeof it.button_label === 'string' && it.button_label.trim())
+              ? it.button_label.trim() : opts.defaultButton;
+            a.textContent = label;
+            var arrow = document.createElement('span');
+            arrow.className = 'cp-card-btn-arrow';
+            arrow.setAttribute('aria-hidden', 'true');
+            arrow.textContent = '→';
+            a.appendChild(arrow);
+            card.appendChild(a);
+          }
+
+          frag.appendChild(card);
+        });
+
+        grid.innerHTML = '';
+        grid.appendChild(frag);
+      })
+      .catch(hideSection);
+  }
+
+  /* Upcoming Events — soonest date first; date badge, optional location line */
+  render({
+    src: 'content/events.json',
+    sectionId: 'upcoming-events', gridId: 'events-grid', introId: 'events-intro',
+    defaultButton: 'Register',
+    sort: function(a, b){ return String(a.date || '').localeCompare(String(b.date || '')); },
+    badge: function(it){ return fmtDate(it.date); },
+    meta: function(it){ return typeof it.location === 'string' ? it.location.trim() : ''; }
+  });
+
+  /* Scholarship — deadline badge, "Apply" button */
+  render({
+    src: 'content/scholarship.json',
+    sectionId: 'scholarship', gridId: 'scholarship-grid', introId: 'scholarship-intro',
+    defaultButton: 'Apply',
+    badge: function(it){
+      var dl = typeof it.deadline === 'string' ? it.deadline.trim() : '';
+      return dl ? ('Deadline: ' + dl) : '';
+    }
+  });
 })();
 
 /* ── Programs nav dropdown: keep aria-expanded in sync for AT ── */

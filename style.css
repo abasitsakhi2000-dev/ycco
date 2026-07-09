@@ -1586,20 +1586,22 @@ footer{
   .news-card:hover{ transform:none; }
 }
 
-/* ===== CURRENT PROJECTS ===== */
-.current-projects{ padding: var(--spacing-2xl) 0; background: var(--color-bg-alt); }
+/* ===== PROGRAMS SUB-SECTIONS (Upcoming Events, Scholarship) ===== */
+.cp-section{ padding: var(--spacing-2xl) 0; background: var(--color-bg); }
+.cp-section.cp-section-alt{ background: var(--color-bg-alt); }
 .cp-label{
   font-size:0.8rem; font-weight:700; letter-spacing:0.12em;
   text-transform:uppercase; color:var(--color-accent);
   margin-bottom:var(--spacing-sm);
 }
-.current-projects h2{
+.cp-section h2{
   font-size:42px; font-weight:800; color:#111827;
   line-height:1.08; margin-bottom:16px; letter-spacing:-0.5px;
 }
-.current-projects > .section-container > .reveal > p{
+.cp-section > .section-container > .reveal > p{
   font-size:15px; color:var(--color-text-muted); line-height:1.7; max-width:640px;
 }
+.cp-card-meta{ font-size:0.88rem; font-weight:600; color:var(--color-accent); }
 .cp-intro{ margin-top:14px; color:var(--color-text); font-size:15.5px; line-height:1.7; max-width:720px; }
 .cp-grid{
   display:grid; gap:var(--spacing-md);
@@ -1636,7 +1638,7 @@ footer{
 .cp-card-btn-arrow{ transition:transform var(--transition-base); }
 .cp-card-btn:hover .cp-card-btn-arrow{ transform:translateX(3px); }
 @media (max-width:640px){
-  .current-projects h2{ font-size:32px; }
+  .cp-section h2{ font-size:32px; }
   .cp-grid{ grid-template-columns:1fr; }
   .cp-card{ padding:26px 22px; }
 }
