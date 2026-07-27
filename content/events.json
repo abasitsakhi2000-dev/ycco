@@ -1,13 +1,4 @@
 {
   "intro": "",
-  "items": [
-    {
-      "title": "Webinar: Public Diplomacy",
-      "date": "2026-07-23",
-      "location": "Online",
-      "description": "An open session on public diplomacy, communication and advocacy for young changemakers. Everyone can apply.\n\nRegister using the form below and we will send you the joining details.",
-      "form_url": "",
-      "button_label": "Register"
-    }
-  ]
+  "items": []
 }
