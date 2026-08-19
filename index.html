@@ -38,8 +38,26 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 <link rel="canonical" href="https://www.infoycco.com/">
+<script>
+/* ── CMS content: start the fetches here, render them later ──────
+   These three JSON files drive the News, Upcoming Events and
+   Scholarship sections. Kicking them off in the head puts them in
+   flight alongside the stylesheet instead of behind it, which keeps
+   them off the critical request chain; the scripts at the end of
+   the body await these promises rather than issuing their own
+   request. `no-cache` is kept so CMS edits appear immediately. ── */
+window.YCCO_CONTENT = ['news','events','scholarship'].reduce(function(acc, name){
+  acc[name] = fetch('content/' + name + '.json', { cache: 'no-cache' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    /* Settle to null rather than rejecting: nothing attaches a handler
+       until the body scripts run, and the consumers already hide their
+       section when the data is null. */
+    .catch(function(){ return null; });
+  return acc;
+}, {});
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -50,7 +68,7 @@
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-left">
     <div class="logo-box">
-      <img src="images/logo.png" alt="Youth Commitment for Change Organisation logo" class="site-logo" width="80" height="80" loading="eager">
+      <img src="images/logo.png?v=2" alt="Youth Commitment for Change Organisation logo" class="site-logo" width="80" height="80" loading="eager">
     </div>
     <span class="logo-wordmark">YCCO</span>
   </div>
@@ -465,7 +483,7 @@
 <div class="foot-brand reveal">
   <div class="foot-logo-row">
     <div class="foot-logo-box">
-      <img src="images/logo.png" alt="Youth Commitment for Change Organisation logo" class="foot-logo" width="80" height="80" loading="lazy">
+      <img src="images/logo.png?v=2" alt="Youth Commitment for Change Organisation logo" class="foot-logo" width="80" height="80" loading="lazy">
     </div>
     <span class="foot-logo-name">YCCO</span>
   </div>
@@ -943,6 +961,10 @@ if(sdgCanvas){
   const segSpan=(Math.PI*2 - gap*n)/n;
   let a=-Math.PI/2;
 
+  /* Draw wedges and collect label placements first; ctx.font triggers a
+     style resolution, so it's set twice below (once per variant) instead
+     of once per segment to avoid forcing 17 redundant recalculations. */
+  const labels=[];
   for(let i=0;i<n;i++){
     const isHL=HIGHLIGHT.has(i), color=COLORS[i];
     ctx.beginPath();
@@ -952,17 +974,26 @@ if(sdgCanvas){
     ctx.fillStyle = isHL ? color : color+'50';
     ctx.fill();
     const mid=a+segSpan/2, lr=(outer+inner)/2;
-    const lx=cx+Math.cos(mid)*lr, ly=cy+Math.sin(mid)*lr;
-    ctx.save();
-    ctx.translate(lx,ly);
-    ctx.rotate(mid+Math.PI/2);
-    ctx.fillStyle = isHL ? '#fff' : 'rgba(0,0,0,0.35)';
-    ctx.font=(isHL?'bold ':'')+''+(isHL?13:9)+'px Inter,sans-serif';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText(i+1,0,0);
-    ctx.restore();
+    labels.push({
+      i, isHL,
+      lx: cx+Math.cos(mid)*lr, ly: cy+Math.sin(mid)*lr,
+      rot: mid+Math.PI/2
+    });
     a+=segSpan+gap;
   }
+
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  [false,true].forEach(function(isHL){
+    ctx.font = isHL ? 'bold 13px Inter,sans-serif' : '9px Inter,sans-serif';
+    ctx.fillStyle = isHL ? '#fff' : 'rgba(0,0,0,0.35)';
+    labels.filter(function(l){ return l.isHL === isHL; }).forEach(function(l){
+      ctx.save();
+      ctx.translate(l.lx,l.ly);
+      ctx.rotate(l.rot);
+      ctx.fillText(l.i+1,0,0);
+      ctx.restore();
+    });
+  });
 })();
 </script>
 
@@ -1011,11 +1042,8 @@ if(sdgCanvas){
   function hideSection(){ if(section){ section.hidden = true; } }
   function safeLink(url){ return typeof url === 'string' && /^(https?:\/\/|\/)/i.test(url.trim()); }
 
-  /* Below-the-fold content: fetch after the page has finished loading so
-     this request doesn't compete with critical above-the-fold resources. */
-  window.addEventListener('load', function(){
-  fetch('content/news.json', { cache: 'no-cache' })
-    .then(function(r){ return r.ok ? r.json() : null; })
+  /* Request was started in the head; this only renders the result. */
+  window.YCCO_CONTENT.news
     .then(function(data){
       var items = (data && Array.isArray(data.items)) ? data.items.slice() : [];
       items.sort(function(a, b){ return String(b.date || '').localeCompare(String(a.date || '')); });
@@ -1081,7 +1109,6 @@ if(sdgCanvas){
       grid.appendChild(frag);
     })
     .catch(hideSection);
-  });
 })();
 </script>
 <script>
@@ -1105,8 +1132,8 @@ if(sdgCanvas){
     if(!grid) return;
     function hideSection(){ if(section){ section.hidden = true; } }
 
-    fetch(opts.src, { cache: 'no-cache' })
-      .then(function(r){ return r.ok ? r.json() : null; })
+    /* Request was started in the head; this only renders the result. */
+    opts.source
       .then(function(data){
         var items = (data && Array.isArray(data.items)) ? data.items.slice() : [];
         items = items.filter(function(it){ return it && it.title; });
@@ -1180,29 +1207,25 @@ if(sdgCanvas){
       .catch(hideSection);
   }
 
-  /* Below-the-fold content: fetch after the page has finished loading so
-     these requests don't compete with critical above-the-fold resources. */
-  window.addEventListener('load', function(){
-    /* Upcoming Events — soonest date first; date badge, optional location line */
-    render({
-      src: 'content/events.json',
-      sectionId: 'upcoming-events', gridId: 'events-grid', introId: 'events-intro',
-      defaultButton: 'Register',
-      sort: function(a, b){ return String(a.date || '').localeCompare(String(b.date || '')); },
-      badge: function(it){ return fmtDate(it.date); },
-      meta: function(it){ return typeof it.location === 'string' ? it.location.trim() : ''; }
-    });
+  /* Upcoming Events — soonest date first; date badge, optional location line */
+  render({
+    source: window.YCCO_CONTENT.events,
+    sectionId: 'upcoming-events', gridId: 'events-grid', introId: 'events-intro',
+    defaultButton: 'Register',
+    sort: function(a, b){ return String(a.date || '').localeCompare(String(b.date || '')); },
+    badge: function(it){ return fmtDate(it.date); },
+    meta: function(it){ return typeof it.location === 'string' ? it.location.trim() : ''; }
+  });
 
-    /* Scholarship — deadline badge, "Apply" button */
-    render({
-      src: 'content/scholarship.json',
-      sectionId: 'scholarship', gridId: 'scholarship-grid', introId: 'scholarship-intro',
-      defaultButton: 'Apply',
-      badge: function(it){
-        var dl = typeof it.deadline === 'string' ? it.deadline.trim() : '';
-        return dl ? ('Deadline: ' + dl) : '';
-      }
-    });
+  /* Scholarship — deadline badge, "Apply" button */
+  render({
+    source: window.YCCO_CONTENT.scholarship,
+    sectionId: 'scholarship', gridId: 'scholarship-grid', introId: 'scholarship-intro',
+    defaultButton: 'Apply',
+    badge: function(it){
+      var dl = typeof it.deadline === 'string' ? it.deadline.trim() : '';
+      return dl ? ('Deadline: ' + dl) : '';
+    }
   });
 })();
 
