@@ -192,8 +192,10 @@ button:focus-visible, a:focus-visible {
   stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
   transition:transform var(--transition-base);
 }
-.nav-item-dropdown:hover .nav-caret,
-.nav-item-dropdown:focus-within .nav-caret{ transform:rotate(180deg); }
+@media (min-width: 1025px) {
+  .nav-item-dropdown:hover .nav-caret,
+  .nav-item-dropdown:focus-within .nav-caret{ transform:rotate(180deg); }
+}
 .nav-submenu{
   position:absolute; top:100%; left:50%;
   transform:translateX(-50%) translateY(6px);
@@ -207,10 +209,12 @@ button:focus-visible, a:focus-visible {
 }
 /* invisible bridge so the menu doesn't close while the cursor moves down */
 .nav-submenu::before{ content:""; position:absolute; top:-14px; left:0; right:0; height:14px; }
-.nav-item-dropdown:hover .nav-submenu,
-.nav-item-dropdown:focus-within .nav-submenu{
-  opacity:1; visibility:visible; pointer-events:auto;
-  transform:translateX(-50%) translateY(0);
+@media (min-width: 1025px) {
+  .nav-item-dropdown:hover .nav-submenu,
+  .nav-item-dropdown:focus-within .nav-submenu{
+    opacity:1; visibility:visible; pointer-events:auto;
+    transform:translateX(-50%) translateY(0);
+  }
 }
 .nav-submenu a{
   display:block; padding:10px 14px; border-radius:9px;
