@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 
-Sitemap: https://infoycco.com/sitemap.xml
+Sitemap: https://www.infoycco.com/sitemap.xml
