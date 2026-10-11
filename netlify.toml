@@ -11,10 +11,11 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Security headers applied to every response. CSP stays in the per-page <meta>
-# tags on purpose (the public site and /admin need different policies), so it is
-# not set here. X-Frame-Options is set as a real header because CSP
-# frame-ancestors in a <meta> tag is ignored by browsers.
+# Security headers applied to every response. CSP is not set on "/*" because
+# the public site and /admin need different policies, and Netlify combines
+# same-named headers from overlapping rules (which would break the CMS).
+# X-Frame-Options is set as a real header because CSP frame-ancestors in a
+# <meta> tag is ignored by browsers.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -23,6 +24,18 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), camera=(), microphone=()"
+
+# CSP for the public page, sent as a real header so frame-ancestors is enforced.
+# Keep in sync with the <meta> CSP in index.html. /admin keeps its own <meta> CSP.
+[[headers]]
+  for = "/"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'; upgrade-insecure-requests"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'; upgrade-insecure-requests"
 
 # Let /admin resolve with or without a trailing slash.
 [[redirects]]
